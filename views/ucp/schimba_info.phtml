@@ -1,0 +1,36 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: ?>
+	<h2>Schimba informatiile personale</h2><br/><br/>
+<?php if($page['updated'] == true): ?>
+	Datele au fost modificate cu succes. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a><br/>
+<?php else: ?>
+	<?php if($page['incomplet'] == true): ?>
+		Trebuie completate toate campurile. <br/><br/>
+	<?php endif; ?>
+	<?php if($page['cnp_gresit'] == true): ?>
+		CNP-ul trebuie sa aiba 13 cifre. <br/><br/>
+	<?php endif; ?>
+	<form method="post" action="ucp/schimba_info">
+
+				Nume: <br/>
+				<input type="text" size="40" value="<?=$page['nume']?>" name="nume"><br/><br/>
+			
+				Prenume :<br/>
+				<input type="text" size="40" value="<?=$page['prenume']?>" name="prenume"><br/><br/>
+			
+				CNP :<br/>
+				<input type="text" size="40" value="<?=$page['cnp']?>" name="cnp"><br/><br/>
+			
+				Adresa :<br/>
+				<input type="text" size="40" value="<?=$page['adresa']?>" name="adresa"><br/><br/>
+			
+		<br/><br/>
+		<input type="submit" value="Modifica">
+		
+		
+	</form>
+<?php endif;endif; ?>
+	

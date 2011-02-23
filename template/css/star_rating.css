@@ -1,0 +1,95 @@
+/*             styles for the star rater                */	
+.rating {
+	font-size: .74em
+}
+.star-rating {
+	list-style:none;
+	margin: 0px;
+	padding:0px;
+	width: 125px;
+	height: 25px;
+	position: relative;
+	overflow:hidden;
+	background: url(../img/alt_star.png) top left repeat-x;		
+}
+.star-rating li{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+	/*\*/
+	float: left;
+	/* */
+}
+.star-rating li a{
+	display:block;
+	width:25px;
+	height: 25px;
+	line-height:25px;		
+	text-decoration: none;
+	text-indent: -9000px;
+	z-index: 20;
+	position: absolute;
+	padding: 0px;
+	overflow:hidden;
+}
+.star-rating li a:hover{
+	background: url(../img/alt_star.png) left bottom;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	border:none;
+}
+.star-rating a.one-star{
+	top: 0;
+	left: 0;
+}
+.star-rating a.one-star:hover{
+	top: 0;
+	width:25px;
+}
+.star-rating a.two-stars{
+	top: 0;
+	left:25px;
+}
+.star-rating a.two-stars:hover{
+	top: 0;
+	width: 50px;
+}
+.star-rating a.three-stars{
+	top: 0;
+	left: 50px;
+}
+.star-rating a.three-stars:hover{
+	top: 0;
+	width: 75px;
+}
+.star-rating a.four-stars{
+	top: 0;
+	left: 75px;
+}	
+.star-rating a.four-stars:hover{
+	top: 0;
+	width: 100px;
+}
+.star-rating a.five-stars{
+	top: 0;
+	left: 100px;
+}
+.star-rating a.five-stars:hover{
+	top: 0;
+	width: 125px;
+}
+.star-rating li.current-rating{
+	left:0; top: 0;
+	background: url(../img/alt_star.png) left center;
+	position: absolute;
+	height: 25px;
+	display: block;
+	text-indent: -9000px;
+	z-index: 1;
+}
+
+/* remove halo effect in firefox   */
+a:active{
+	outline: none;
+}

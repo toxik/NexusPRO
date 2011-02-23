@@ -1,0 +1,28 @@
+<h2>Aplicaţii</h2>
+<h3>Cumpărare aplicaţie</h3>
+<?php if($page['access']):
+	if(!$page['error']):
+		if (isset($_POST['confirm'])): ?>
+			<p>Aplicatia a fost cumparata</p>
+			<p>O puteti downloada accesand <a href="/down/app/id/<?=$_GET['id']?>">acest link</a>.</p>
+			<p>Va multumim!</p>
+		<?php else: ?>
+			<?php if($page['howMany']): ?>
+				<p><span style="color:red">Atentie!</span> Ati mai cumparat deja aceasta aplicatie 
+					<?=($page['howMany'] == 1) ? 'o data' : ' de '.$page['howMany'].' ori' ?>.</p>
+			<?php endif; ?>
+			<form method="post">
+			<input type="checkbox" name="confirm" id="confirm" />
+			<label for="confirm">Sunteti sigur(a) ca doriti sa cumparati aceasta aplicatie ?</label>
+			<input type="submit" value="Da" />
+			</form>
+		<?php endif;
+	else: ?>
+	<p>Nu puteti cumpara aceasta aplicatie deoarece nu aveti destui bani in cont.<br />
+	Va rugam sa adaugati banii necesari pentru a putea cumpara aplicatia.</p>
+	<p>Va multumim.</p>
+	<?php endif; ?>
+<?php else: ?>
+<p>Nu aveti permisiunea sa cumparati aceasta aplicatie (fie nu sunteti logat, fie este este a dvs).</p>
+<p>De asemenea, verificati daca ati selectat o aplicatie valida.</p>
+<?php endif; ?>

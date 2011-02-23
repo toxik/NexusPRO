@@ -1,0 +1,83 @@
+<?php if (isset($page['delog'])) echo $page['delog']?>
+<?php if(isset($page['afiseaza_formular'])): ?>
+
+<!-- Start of reactivate table: -->
+
+	<form action="auth/reactiv" method="post" onsubmit="return validate_form(this)">
+	<table border="5" style="text-align:center" width="400">
+	<tr>
+		<th colspan="2">Reactivare:</th>
+	</tr>
+	<tr>
+		<td colspan="2">Aici puteti sa va reactivati conturile mai vechi. Introduceti cnp:</td>
+	</tr>
+	<tr>
+		<td><b>CNP: </b></td><td><input value="<?=$_POST['user_cnp']?>" name="cnp" size="14" maxlength="13"/></td>
+	</tr>
+	<tr>
+		<td><b>Parola: </b></td><td><input type="password" name="password" /></td>
+	</tr>
+	<tr>
+		<td>Cauta cont dupa cnp: </td><td><input value="Cauta" type="submit"/></td>
+	</tr>
+	<?php  if (isset($page['error'])) echo '
+	<tr>
+		<td colspan="2"><b style="color:red"> Eroare: '.$page['error'].'</b></td>
+	</tr>
+	'; ?>
+	</table>
+	</form>
+<!-- End of reactivate table. -->
+<?php endif ?>
+<?php if(isset($page['content'])): ?>
+<p>
+	<form action="auth/reactiv" method="post" onsubmit="return validate_form(this)">
+	<table border="5" style="text-align: center">
+	<tr>
+		<th colspan="4">Reactivare:</th>
+	</tr>
+	<tr>
+		<th colspan="4">Urmatorul cont este inregistrat pe cnp-ul dvs. :</th>
+	</tr>
+	<tr>
+		<td><b>Nume:</b></td><td><?php echo $page['user_first_name']?></td>
+		<td><b>Prenume:</b></td><td><?php echo $page['user_last_name']?></td>
+	</tr>
+	<tr>
+		<td><b>Username:</b></td><td><?php echo $page['user_name']?></td>
+		<td><b>Parola:</b></td><td><input type="password" name="retype_password" /></td>
+	</tr>
+	<tr>
+		<td><b>Tip cont:</b></td><td>
+		<?php 
+		if($page['user_type']==1) echo "Client";
+		if($page['user_type']==2) echo "Analist";
+		if($page['user_type']==3) echo "Proiectant";
+		if($page['user_type']==4) echo "Programator";
+		if($page['user_type']==5) echo "Tester";
+		?></td>
+		<td><b>CNP:</b></td><td><input name="cnp" size="13" type="text" readonly="readonly" value="<?=$_POST['cnp']?>" />
+	</tr>
+	<tr>
+		<td><b>E-mail:</b></td><td><?php echo $page['user_email']?></td>
+		<td><b>Telefon:</b></td><td><?php echo $page['user_phone']?></td>
+	</tr>
+	<tr>
+		<td><b>Adresa:</b></td><td><?php echo $page['user_address']?></td>
+		<td><b>Website:</b></td><td><?php echo $page['user_website']?></td>
+	</tr>
+	<?php  if (isset($page['error'])) echo '
+	<tr>
+		<td colspan="2"><b style="color:red"> Eroare: '.$page['error'].'</b></td>
+	</tr>
+	'; ?>
+	<tr><td colspan="3">Doriti sa va reactivati contul?</td>
+		<td><input type="submit" value="Reactiveaza" /></td>
+	</tr>
+	</table>
+	</form>
+</p>
+<?php endif ?>
+<?php if($page['final']): ?>
+<?php if($page['error']=="") echo "Contul dvs. a fost reactivat"; ?>
+<?php endif ?>

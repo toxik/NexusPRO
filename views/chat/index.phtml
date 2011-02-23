@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Chat (<?=$page['user_name']?>)</title>
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.0.0/build/cssreset/reset-min.css&3.0.0/build/cssfonts/fonts-min.css&3.0.0/build/cssgrids/grids-min.css" />
+	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/excite-bike/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<style type="text/css">
+		body { font-family: Verdana,Arial,sans-serif; font-size: 1.1em;
+			font-size: 75%; text-align: left }
+		input[type="text"] { padding: .5em .2em; text-decoration: none; margin: 5px}
+		#chatWrap { height: 100%; width: 100%; margin:25px; }
+		#chatWrap > div { overflow: auto; height: 100% }
+		#nick { text-align: center }
+		#msgWrap { height: 51px; position: fixed; left: 0; bottom: 0px; width: 100%}
+		span.smile{ padding:0px 7px;font-size: 16.4px;}
+		span.hidden{color:#afb4b4;}span.smiley{background:url(/template/img/emoticons_webmatrix.png) 0 0 no-repeat;}span.sadface{background:url(/template/img/emoticons_webmatrix.png) 0 -19px no-repeat;}span.bigsmiley{background:url(/template/img/emoticons_webmatrix.png) 0 -38px no-repeat;}span.cool{background:url(/template/img/emoticons_webmatrix.png) 0 -57px no-repeat;}span.surprised{background:url(/template/img/emoticons_webmatrix.png) 0 -76px no-repeat;}span.crying{background:url(/template/img/emoticons_webmatrix.png) 0 -95px no-repeat;}span.sweating{background:url(/template/img/emoticons_webmatrix.png) 0 -114px no-repeat;}span.speechless{background:url(/template/img/emoticons_webmatrix.png) 0 -133px no-repeat;}span.kiss{background:url(/template/img/emoticons_webmatrix.png) 0 -152px no-repeat;}span.tonque{background:url(/template/img/emoticons_webmatrix.png) 0 -171px no-repeat;}span.blush{background:url(/template/img/emoticons_webmatrix.png) 0 -190px no-repeat;}span.wondering{background:url(/template/img/emoticons_webmatrix.png) 0 -209px no-repeat;}span.sleepy{background:url(/template/img/emoticons_webmatrix.png) 0 -228px no-repeat;}span.dull{background:url(/template/img/emoticons_webmatrix.png) 0 -247px no-repeat;}span.inlove{background:url(/template/img/emoticons_webmatrix.png) 0 -266px no-repeat;}span.wink{background:url(/template/img/emoticons_webmatrix.png) 0 -285px no-repeat;}span.evilgrin{background:url(/template/img/emoticons_webmatrix.png) 0 -304px no-repeat;}span.talking{background:url(/template/img/emoticons_webmatrix.png) 0 -323px no-repeat;}span.yawn{background:url(/template/img/emoticons_webmatrix.png) 0 -342px no-repeat;}span.puking{background:url(/template/img/emoticons_webmatrix.png) 0 -361px no-repeat;}span.doh{background:url(/template/img/emoticons_webmatrix.png) 0 -380px no-repeat;}span.angry{background:url(/template/img/emoticons_webmatrix.png) 0 -399px no-repeat;}span.wasntme{background:url(/template/img/emoticons_webmatrix.png) 0 -418px no-repeat;}span.party{background:url(/template/img/emoticons_webmatrix.png) 0 -437px no-repeat;}span.worried{background:url(/template/img/emoticons_webmatrix.png) 0 -456px no-repeat;}span.mm{background:url(/template/img/emoticons_webmatrix.png) 0 -475px no-repeat;}span.nerdy{background:url(/template/img/emoticons_webmatrix.png) 0 -494px no-repeat;}span.lipssealed{background:url(/template/img/emoticons_webmatrix.png) 0 -513px no-repeat;}span.hi{background:url(/template/img/emoticons_webmatrix.png) 0 -532px no-repeat;}span.call{background:url(/template/img/emoticons_webmatrix.png) 0 -551px no-repeat;}span.devil{background:url(/template/img/emoticons_webmatrix.png) 0 -570px no-repeat;}span.angel{background:url(/template/img/emoticons_webmatrix.png) 0 -589px no-repeat;}span.envy{background:url(/template/img/emoticons_webmatrix.png) 0 -608px no-repeat;}span.wait{background:url(/template/img/emoticons_webmatrix.png) 0 -627px no-repeat;}span.makeup{background:url(/template/img/emoticons_webmatrix.png) 0 -646px no-repeat;}span.chuckle{background:url(/template/img/emoticons_webmatrix.png) 0 -665px no-repeat;}span.clapping{background:url(/template/img/emoticons_webmatrix.png) 0 -684px no-repeat;}span.thinking{background:url(/template/img/emoticons_webmatrix.png) 0 -703px no-repeat;}span.emo{background:url(/template/img/emoticons_webmatrix.png) 0 -722px no-repeat;}span.ROFL{background:url(/template/img/emoticons_webmatrix.png) 0 -741px no-repeat;}span.whew{background:url(/template/img/emoticons_webmatrix.png) 0 -760px no-repeat;}span.happy{background:url(/template/img/emoticons_webmatrix.png) 0 -779px no-repeat;}span.nod{background:url(/template/img/emoticons_webmatrix.png) 0 -798px no-repeat;}span.shake{background:url(/template/img/emoticons_webmatrix.png) 0 -817px no-repeat;}span.smirk{background:url(/template/img/emoticons_webmatrix.png) 0 -836px no-repeat;}span.punch{background:url(/template/img/emoticons_webmatrix.png) 0 -855px no-repeat;}span.bow{background:url(/template/img/emoticons_webmatrix.png) 0 -874px no-repeat;}span.hug{background:url(/template/img/emoticons_webmatrix.png) 0 -893px no-repeat;}span.yes{background:url(/template/img/emoticons_webmatrix.png) 0 -912px no-repeat;}span.no{background:url(/template/img/emoticons_webmatrix.png) 0 -931px no-repeat;}span.handshake{background:url(/template/img/emoticons_webmatrix.png) 0 -950px no-repeat;}span.skype{background:url(/template/img/emoticons_webmatrix.png) 0 -969px no-repeat;}span.heart{background:url(/template/img/emoticons_webmatrix.png) 0 -988px no-repeat;}span.brokenheart{background:url(/template/img/emoticons_webmatrix.png) 0 -1007px no-repeat;}span.mail{background:url(/template/img/emoticons_webmatrix.png) 0 -1026px no-repeat;}span.flower{background:url(/template/img/emoticons_webmatrix.png) 0 -1045px no-repeat;}span.raining{background:url(/template/img/emoticons_webmatrix.png) 0 -1064px no-repeat;}span.sun{background:url(/template/img/emoticons_webmatrix.png) 0 -1083px no-repeat;}span.time{background:url(/template/img/emoticons_webmatrix.png) 0 -1102px no-repeat;}span.music{background:url(/template/img/emoticons_webmatrix.png) 0 -1121px no-repeat;}span.movie{background:url(/template/img/emoticons_webmatrix.png) 0 -1140px no-repeat;}span.phone{background:url(/template/img/emoticons_webmatrix.png) 0 -1159px no-repeat;}span.coffee{background:url(/template/img/emoticons_webmatrix.png) 0 -1178px no-repeat;}span.pizza{background:url(/template/img/emoticons_webmatrix.png) 0 -1197px no-repeat;}span.cash{background:url(/template/img/emoticons_webmatrix.png) 0 -1216px no-repeat;}span.muscle{background:url(/template/img/emoticons_webmatrix.png) 0 -1235px no-repeat;}span.cake{background:url(/template/img/emoticons_webmatrix.png) 0 -1254px no-repeat;}span.beer{background:url(/template/img/emoticons_webmatrix.png) 0 -1273px no-repeat;}span.drink{background:url(/template/img/emoticons_webmatrix.png) 0 -1292px no-repeat;}span.dance{background:url(/template/img/emoticons_webmatrix.png) 0 -1311px no-repeat;}span.ninja{background:url(/template/img/emoticons_webmatrix.png) 0 -1330px no-repeat;}span.star{background:url(/template/img/emoticons_webmatrix.png) 0 -1349px no-repeat;}span.mooning{background:url(/template/img/emoticons_webmatrix.png) 0 -1368px no-repeat;}span.finger{background:url(/template/img/emoticons_webmatrix.png) 0 -1387px no-repeat;}span.bandit{background:url(/template/img/emoticons_webmatrix.png) 0 -1406px no-repeat;}span.drunk{background:url(/template/img/emoticons_webmatrix.png) 0 -1425px no-repeat;}span.smoking{background:url(/template/img/emoticons_webmatrix.png) 0 -1444px no-repeat;}span.toivo{background:url(/template/img/emoticons_webmatrix.png) 0 -1463px no-repeat;}span.rock{background:url(/template/img/emoticons_webmatrix.png) 0 -1482px no-repeat;}span.headbang{background:url(/template/img/emoticons_webmatrix.png) 0 -1501px no-repeat;}span.bug{background:url(/template/img/emoticons_webmatrix.png) 0 -1520px no-repeat;}span.fubar{background:url(/template/img/emoticons_webmatrix.png) 0 -1539px no-repeat;}span.tmi{background:url(/template/img/emoticons_webmatrix.png) 0 -1558px no-repeat;}span.swear{background:url(/template/img/emoticons_webmatrix.png) 0 -1577px no-repeat;}span.poolparty{background:url(/template/img/emoticons_webmatrix.png) 0 -1596px no-repeat;}span.heidy{background:url(/template/img/emoticons_webmatrix.png) 0 -1615px no-repeat;}
+		#userList li { margin:1px }
+		#userList { overflow: auto }
+		.red { color: red; font-weight: bold }
+	</style>
+	<script type="text/javascript">
+	function resizeChat() {
+		myH = window.innerHeight
+		$("#chatWrap > div").css('height', (myH-160) + "px")
+		$("#userList").css('height', (myH-142) + "px")
+	}
+	</script>
+</head>
+<body onload="resizeChat()" onresize="resizeChat()">
+	<div id="bigWrap" style="height: 100%">
+		<table style="width: 100%"><tbody>
+		<tr><td>
+		<div id="chatWrap" style="margin-bottom: 41px; height:100%;float:left;">
+			<ul>
+				<li><a href="#all" style="color:white">Main Chat</a></li>
+			</ul>
+			<div id="all" class="toXchat">
+			</div>
+		</div></td>
+		<td style="width:240px; padding-right:5px" valign="top" class="ui-widget">
+			<div style="width: 200px; float: right; margin-top: 25px" class="ui-state-highlight ui-corner-all">
+			<h4 class="ui-state-default" style="font-size: 1.2em; padding:10px;">Lista uzeri</h4>
+			<ul id="userList" style="padding: 5px">
+			</ul>
+		</div></td></tr>
+		</tbody></table>
+		<div id="msgWrap">
+			<form id="messageForm" onsubmit="return sendMessage()" 
+				style="margin-left:20px; text-align: center" action="chat/update">
+				<input type="hidden" id="receiver" name="receiver" value="all" />
+				<input type="hidden" name="whoami" value="<?=$page['user_name']?>" />
+				<table style="width: 100%">
+				<tbody>
+				<tr>
+					<td style="text-align: right">
+						<input type="text" autocomplete="off" name="message" style="width:100%;" />
+					</td>
+					<td style="width: 120px">
+						<input type="submit" value="Trimite" />
+					</td>
+				</tr>
+				</tbody>
+				</table>
+			</form>
+			
+		</div>
+	</div>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="template/js/chat.js"></script>
+</body>
+</html>

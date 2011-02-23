@@ -1,0 +1,61 @@
+<?php if($page['pag_gresita']): ?>
+	<?=$page['pag_gresita']?> <br/>
+<?php else : if($page['no_users']): ?>
+	<?=$page['no_users']?> <br/>	
+<?php else: ?>
+	
+	<form method="get" action="cauta/useri">
+		Ordoneaza dupa: <select name="orderby">
+			<option value="username">username</option>
+			<option value="nume">nume</option>
+			<option value="prenume">prenume</option>
+			<option value="rating">rating</option>
+		</select>
+		<input type="submit" value="Ordoneaza">
+	</form>
+	<br/>
+	
+	<table class="full zebra">
+		<tr>
+			<th>Username</th>
+			<th>Nume</th>
+			<th>Prenume</th>
+			<th>Rating</th>
+			<th>Chat</th>
+		</tr>
+		<?php foreach($page['useri'] as $c): ?>
+			<tr>
+				<td>
+					<a href="ucp/profil/username/<?=$c['username']?>"><?=$c['username']?></a>
+				</td>
+				<td>
+					<?=$c['nume']?>
+				</td>
+				<td>
+					<?=$c['prenume']?>
+				</td>
+				<td>
+					<?=$c['rating']?>
+					
+				</td>
+				<td>
+					<a href="/statice/eroare/nojs" class="goChat" rel="<?=$c['username']?>">Chat</a>
+				</td>
+				
+			</tr>
+		<?php endforeach; ?>
+	</table>
+	<br/><br/>
+	<div style="width: 100%; text-align: center">
+		<div style="width: 50%;">Pagina:
+			<?php for($i = 1; $i <= $page['nr_pag']; $i++):?>
+				<?php if($i == $_GET['pag']): ?>
+					<?=$i?>
+				<?php else: ?>
+					<a href="cauta/useri/orderby/<?=$_GET['orderby']?>/pag/<?=$i?>"><?=$i?></a> 
+				<?php endif; ?>
+				
+			<? endfor; ?>
+		</div>
+	</div>
+<?php endif;endif; ?>

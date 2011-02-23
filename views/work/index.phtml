@@ -1,0 +1,103 @@
+<h2>Work</h2>
+<h3>Listarea proiectelor</h3>
+<?php if($page['not_logged_in'] == true): ?>
+	Trebuie sa fii logat pentru a avea acces la aceasta pagina <br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: ?>
+	<?php if($page['fara_lucru'] == false): ?>
+		<span style="font-weight: bold">Proiecte la care trebuie sa lucrezi: </span><br/>
+		<?php if(count($page['de_lucrat']) == 0): ?>
+			<div style="padding-left: 15px;">Momentan nu ai proiecte la care trebuie sa lucrezi.</div>
+		<?php else: ?>
+			<table style="width: 100%; padding-left: 15px;">
+				<?php foreach($page['de_lucrat'] as $c): ?>
+					<tr>
+						<td width="50%">
+							Nume:<a href="bid/show/project_id/<?=$c['id_prj']?>"><?=$c['nume_prj']?></a>
+						</td>
+						<td>
+							<a href="work/develop/id/<?=$c['id_prj']?>">Lucreaza</a> 
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		<?php endif; ?>
+		<br/><br/>
+		<span style="font-weight: bold">Proiecte la care participi, in lucru sau terminate in ultima saptamana: </span><br/>
+		<?php if(count($page['in_lucru']) == 0): ?>
+			<div style="padding-left: 15px;">Momentan nu ai proiecte la care participi.</div>
+		<?php else: ?>
+			<table style="width: 100%; padding-left: 15px;">
+				<?php foreach($page['in_lucru'] as $c): ?>
+					<tr>
+						<td width="50%">
+							Nume: <a href="bid/show/project_id/<?=$c['id_prj']?>"><?=$c['nume_prj']?></a>
+						</td>
+						<td>Status: <?=$page['status'][$c['status_prj']]?></td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
+		<?php endif; ?>
+		<br/><br/>
+	<?php endif; ?>
+	<span style="font-weight: bold">Proiecte cumparate in lucru sau terminate in ultima saptamana: </span><br/>
+	<?php if(count($page['cump_desf']) == 0): ?>
+		<div style="padding-left: 15px;">Momentan nu ai proiecte cumparate in desfasurare.</div>
+	<?php else: ?>
+		<table style="width: 100%; padding-left: 15px;">
+		<?php foreach($page['cump_desf'] as $c): ?>
+			<tr>
+				<td style="width: 50%">
+					Nume: <a href="bid/show/project_id/<?=$c['id_prj']?>"><?=$c['nume_prj']?></a>
+				</td>
+				<td>
+					Status: <?=$page['status'][$c['status_prj']]?>
+					<?php if($c['status_prj'] == 100): ?>
+						: <a href="/down/prj/id/<?=$c['file_id']?>">Download</a>
+					<?php endif; ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+	<?php endif; ?>
+	<br/><br/>
+	<span style="font-weight: bold">Proiecte cumparate terminate : </span><br/>
+	<?php if(count($page['cump_fin']) == 0): ?>
+		<div style="padding-left: 15px;">Momentan nu ai proiecte cumparate terminate.</div>
+	<?php else: ?>
+		<table style="width: 100%; padding-left: 15px;">
+		<?php foreach($page['cump_fin'] as $c): ?>
+			<tr>
+				<td style="width: 50%">
+					Nume: <a href="bid/show/project_id/<?=$c['id_prj']?>"><?=$c['nume_prj']?></a>
+				</td>
+				<td>
+					Data finalizarii: <?=$c['data_fin']?>
+				</td>
+				<td>
+					<a href="/down/prj/id/<?=$c['file_id']?>">Download</a>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+	<?php endif; ?>
+	<br/><br/>
+	<?php if($page['fara_lucru'] == false): ?>
+		<span style="font-weight: bold">Proiecte terminate la care ai participat: </span><br/>
+		<?php if(count($page['terminat']) == 0): ?>
+			<div style="padding-left: 15px;">Momentan nu ai proiecte termiante la care ai lucrat.</div>
+		<?php else: ?>
+			<table style="width: 100%; padding-left: 15px;">
+			<?php foreach($page['terminat'] as $c): ?>
+				<tr>
+					<td style="width: 50%">
+						Nume: <a href="bid/show/project_id/<?=$c['id_prj']?>"><?=$c['nume_prj']?></a>
+					</td>
+					<td>Data finalizarii: <?=$c['data_fin']?></td>
+				</tr>
+			<?php endforeach; ?>
+			</table>
+		<?php endif; ?>
+		<br/><br/>
+	<?php endif; ?>
+<?php endif;?>

@@ -1,0 +1,15 @@
+@font-face {
+	font-family: 'Ubuntu';
+	src: url('../font/UbuntuTitling-Bold-webfont.eot');
+	src: local('☺'), url('../font/UbuntuTitling-Bold-webfont.woff') format('woff'), url('../font/UbuntuTitling-Bold-webfont.ttf') format('truetype'), url('../font/UbuntuTitling-Bold-webfont.svg#webfont') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+* { margin: 0; padding: 0; border: none; text-decoration: none }
+a, a:visited, a:hover, a:active {
+	color: white;
+	text-shadow: black 0px 0px 4px;
+}
+a:hover, a:active, a.current { text-decoration: underline }
+p { font-family: 'Ubuntu' }
+body { font-size: 1em }

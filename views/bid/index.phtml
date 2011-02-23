@@ -1,0 +1,20 @@
+<?php if($page['show_menu']):?>
+<!-- Bid Menu starts here: -->
+
+<ul>
+	<li><a href="bid/request">Cere un proiect</a></li>
+	<div style="padding-left: 20px;font-size: 80%;">Aici poti face o cere pentru un proiect nou. Completeaza numele si descrierea proiectului pentru ca sa poate incepe preevaluarea</div>
+	<?php
+		if($_SESSION['usertype_id']==2 or $_SESSION['usertype_id']==6)
+			echo '<li><a href="bid/evalueaza">Vezi proiecte ce pot fi evaluate</a></li>
+			<div style="padding-left: 20px;font-size: 80%;">Aici iti poti alege un proiect pe care sa il preevaluezi</div>';
+	?>
+	<li><a href="bid/myproj">Vezi proiecte personale</a></li>
+	<div style="padding-left: 20px;font-size: 80%;">Urmareste statusul proiectelor pe care le-ai cumparat</div>
+	<li><a href="bid/mywork">Vezi proiecte si licitatii la care participi</a></li>
+	<div style="padding-left: 20px;font-size: 80%;">O lista cu licitatiile si proiectele la care iei parte si statusul acestora</div>
+	<li><a href="bid/available">Vezi proiecte la care poti licita</a></li>
+	<div style="padding-left: 20px;font-size: 80%;">Aici ai acces la proiectele care sunt in faza de licitatie</div>
+</ul>
+<!-- Bid Menu ends here -->
+<?php endif?>

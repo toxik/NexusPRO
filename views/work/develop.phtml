@@ -1,0 +1,52 @@
+<h2>Work</h2>
+<h3>Pagina de lucru</h3>
+<?php if ($page['errno'] == 1) {
+	echo '<span style="font-weight:bold; color:red">Eroare:</span> '.$page['error'];
+	return;
+}
+
+if ($page['errno'])
+	echo '<div style="display: block; width:100%; border: 2px solid yellow; padding: 6px;margin: 12px"><span
+		style="color:red; font-weight:bold">Eroare:</span> '.$page['error'].'</div>';
+
+if (count($page['files'])):
+echo '<ul>Fisiere atasate:';
+foreach ($page['files'] as $file)
+	echo '<li><a href="/down/prj/id/'.$file['file_id'].'">'.$file['file_name'].
+			'</a> - <a href="/ucp/profil/username/'.$file['user_name'].'">'.
+			$file['user_first_name'].' '.$file['user_last_name'].'</a></li>';
+echo '</ul>';
+endif;
+
+?>
+
+<? if ($page['controls']['upload']): ?>
+<form method="post" enctype="multipart/form-data" class="txk" action="/work/process">
+<input type="hidden" name="id" value="<?=$_GET['id']?>" />
+	<? if ($page['who'] == 'tester'): ?>
+		<select name="tester">
+			<option value="0">Bug Report</option>
+			<option value="1">Recenzie finala</option>
+		</select>
+	<? endif; ?>
+<input type="file" name="source" /><br />
+<input type="submit" value="Trimite" />
+</form>
+<? endif; ?>
+
+<? if ($page['controls']['bail']): ?>
+<div>
+<a href="/work/process/id/<?=$_GET['id']?>/bail" onclick="return confirm('Sunteti sigur?')">Renunta la acest proiect</a>
+</div>
+<? endif; ?>
+
+<? if ($page['controls']['deny']): ?>
+<div>
+<a href="/work/process/id/<?=$_GET['id']?>/deny" onclick="return confirm('Sunteti sigur?')">Nu-mi convine fisierul primit de la coleg</a>
+</div>
+<? endif; ?>
+
+<div>
+<?//=$page['debug']?>
+<? //Zend_Debug::dump($page['controls']) ?>
+</div>

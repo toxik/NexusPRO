@@ -1,0 +1,11 @@
+<h2>Work</h2>
+<h3>Procesare informatii date</h3>
+<?php if ($page['errno'] == 1) {
+	echo '<span style="font-weight:bold; color:red">Eroare:</span> '.$page['error'];
+	return;
+}
+if ($page['errno'])
+	echo '<div style="display: block; width:100%; border: 2px solid yellow; padding: 6px;margin: 12px"><span
+		style="color:red; font-weight:bold">Eroare:</span> '.$page['error'].'</div>';
+
+echo $page['content']?>

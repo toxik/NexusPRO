@@ -1,0 +1,22 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: if($page['done'] == true): ?>
+	Creditul tau a fost actualizat. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: ?>
+	<h2>Cumpara credit</h2><br/><br/>
+	<?php if($page['fara_suma'] == true): ?>
+		Trebuie sa introduci o suma pentru a cumpara credit.<br/><br/>
+	<?php endif; ?>
+	<?php if($page['caractere_gresite'] == true): ?>
+		Suma trebuie sa fie formata doar din cifre.<br/><br/>
+	<?php endif; ?>
+	<?php if($page['suma_gresita'] == true): ?>
+		Suma trebuie sa fie intre 0 si 1000.<br/><br/>
+	<?php endif; ?>
+	<form method="post" action="ucp/cumpara_credit">
+		Suma: <input type="text" name="suma"><br/><br/>
+		<input type="submit" value="Cumpara">
+	</form>
+<?php endif;endif; ?>

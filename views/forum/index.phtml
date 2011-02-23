@@ -1,0 +1,29 @@
+<h3>Forum: Categorii</h3> <br/>
+<?php if($page['not_logged_in']):?>
+		<?=$page['not_logged_in']?> <br/>
+		<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: ?>
+	<?php if($page['adauga_cat']):?> 
+		<br/><a href="forum/adauga_cat"><?=$page['adauga_cat']?></a><br/><br/>
+	<?php endif; ?>
+
+	<?php if($page['gol']):?> 
+		<br/><?=$page['gol']?>
+	<?php else: ?>
+		<?php foreach($page['content'] as $c): ?>
+			<div style="background-color: #FFF3A3; padding: 5px; border: 1px solid #FFDE00; width: 40%; margin: 3px;">
+				<?php if($page['perm'] == 'admin'): ?>  
+					<div style="width: 100%; text-align: right">
+						<span style="font-size: 80%">
+							<a href="forum/editeaza_cat/id/<?=$c['id']?>">editeaza</a>
+							&nbsp; &nbsp; &nbsp; 
+							<a href="forum/sterge_cat/id/<?=$c['id']?>">sterge</a>
+						</span>
+					</div>
+				<?php endif; ?>	
+				<a href="forum/categorie/id/<?=$c['id']?>"><?=$c['nume']?></a>
+				<br/>
+				<span style="font-size: 80%; padding-left: 20px;"><?=$c['desc']?></span><br/><br/>
+			</div>
+		<?php endforeach; ?> 
+	<? endif;endif; ?>

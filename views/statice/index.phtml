@@ -1,0 +1,64 @@
+<div style="float: right; width: 240px; padding-left: 20px;">	
+		<div style="background: #FFF3A3; border-top: 1px solid #FFDE00;border-bottom: 1px solid #FFDE00;">
+		<h3 style="text-align: center">Ultimele postări pe <a href="forum/index">forum</a></h3>
+		</div>
+		<div style="background-color: #BDD2FF; padding: 5px">
+		<?php foreach($page['posts'] as $c): ?>
+			<div style="margin: 7px 0; padding-bottom: 5px">
+				<a style="font-size:14px" href="forum/thread/cat_id/<?=$c['cat_id']?>/thr_id/<?=$c['thr_id']?>">
+					<?=$c['titlu_thr']?></a><span style="font-size:14px">: <?=$c['titlu_post']?></span>
+				<div style="font-size: 13px;text-align: right" class="full">
+					by <a href="ucp/profil/username/<?=$c['user']?>" 
+						title="la data de <?=$c['data']?>"><?=$c['user']?></a><br/>
+				</div>
+			</div>
+		<?php endforeach; ?>
+		</div>
+	<br/>
+	
+		<div style="background: #FFF3A3; border-top: 1px solid #FFDE00;border-bottom: 1px solid #FFDE00;">
+		<h3 style="text-align: center">Ultimele <a href="app/index">aplicaţii</a></h3>
+		</div>
+	<div style="background-color: #BDD2FF; padding: 5px">
+		<table class="full">
+		<?php foreach($page['apps'] as $c): ?>
+			<tr><td style="padding: 8px 0; font-size: 93.5%">
+				<a href="app/show/id/<?=$c['app_id']?>"><?=$c['nume']?></a>
+			</td>
+			<td style="font-size: 86%;">
+				Autor: <a href="ucp/profil/username/<?=$c['user']?>"><?=$c['user']?></a>
+			</td></tr>
+		<?php endforeach; ?>
+		</table>
+	<br/>
+	</div>
+</div>
+<h2>Home - Anunțuri</h2>
+<?php if($page['admin'] == true): ?>
+	<h3><a href="statice/adauga_anunt">Adauga anunt</a></h3>
+<?php endif; ?>
+<?php foreach($page['anunt'] as $c): ?>
+	<div style="border-left: 1px solid #FF4C00; margin: 17px 0; padding: 0 10px">
+		<?php if($page['admin'] == true): ?>
+			<div>
+				<a href="statice/editeaza_anunt/id/<?=$c['id']?>">editeaza </a>
+				&nbsp; &nbsp; &nbsp; &nbsp;
+				<a href="statice/sterge_anunt/id/<?=$c['id']?>">sterge</a>
+			</div>
+		<?php endif; ?>
+		<h3 style="padding-top:0"><?=$c['titlu']?></h3>
+		<div style="padding-left: 12px;">
+			<?=$c['text']?>
+		</div>
+		<div style="font-size: 85%; width: 100%;text-align: right">
+			<strong>Autor:</strong> <a href="ucp/profil/username/<?=$c['username']?>"><?=$c['username']?></a>
+				&nbsp; &nbsp; &nbsp; &nbsp;
+			<strong>Data:</strong> <?=$c['data']?>
+		</div>
+	</div>
+	
+<?php endforeach; ?>
+
+
+
+<div style="clear: both">&nbsp;</div>

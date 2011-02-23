@@ -1,0 +1,39 @@
+<h3>Proiectele si licitatii la care participi</h3><br/>
+<?php if(isset($page['error'])): ?>
+<b style="color:red">Eroare: <?php echo $page['error']; ?></b>
+<?php endif ?>
+<?php
+	if (count($page['onbid'])==0)
+		echo "<p>Nu aveti licitatii in derulare.</p>";
+	else
+	{
+		echo "<p>In prezent participati la urmatoarele licitatii:</p><br/><table width='50%' style='padding-left: 20px;'>
+		<tr style='font-weight: bold;'>
+			<td>Nume</td>
+			<td>Data cererii proiectului</td>
+		</tr>";
+		for ($i=0; $i<count($page['onbid']); $i++)
+		{
+			echo "<tr><td><a href='bid/show/project_id/".$page['onbid'][$i]['project_id']."'>";
+			echo $page['onbid'][$i]['project_name']." </a></td><td> ".$page['onbid'][$i]['project_requested']."</td></tr>";
+		}
+		echo "</table><br/><br/>";
+	}
+	
+	if (count($page['ongoing'])==0)
+		echo "<p>Nu aveti proiecte in derulare.</p>";
+	else
+	{
+		echo "<p>Aveti urmatoarele proiecte in desfasurare:</p><br/><table width='50%' style='padding-left: 20px;'>
+		<tr style='font-weight: bold;'>
+			<td>Nume</td>
+			<td>Data cererii proiectului</td>
+		</tr>";
+		for ($i=0; $i<count($page['ongoing']); $i++)
+		{
+			echo "<tr><td><a href='bid/show/project_id/".$page['ongoing'][$i]['project_id']."'>";
+			echo $page['ongoing'][$i]['project_name']." </a></td><td>".$page['ongoing'][$i]['project_requested']."</td></tr>";
+		}
+		echo "</table><br/><br/>";
+	}
+?>

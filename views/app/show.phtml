@@ -1,0 +1,12 @@
+<h2>Aplicaţii</h2>
+<h3>Informaţii despre aplicaţie</h3>
+<?php if (!$page['app']): ?>
+	<p>Aplicatia ceruta nu exista.</p>
+<?php else: ?>
+<dl>
+<?php foreach($page['app'] as $id => $info): ?>
+	<dt><?=$page['dict'][$id]?>:</dt>
+		<dd><?=$info?></dd>
+<?php endforeach; ?>
+</dl>
+<?php endif; 

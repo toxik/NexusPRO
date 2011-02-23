@@ -1,0 +1,28 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: if($page['not_allowed'] == true): ?>
+	Nu ai acces la aceasta pagina. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['self'] == true): ?>
+	Administratorul nu isi poate dezactiva singur contul. Contacteaza alt administrator pentru ajutor.<br/>
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['pr_desf']): ?>
+	Userul are inca proiecte in desfasurare si nu poate fi dezactivat momentan.
+<?php else: if($page['done'] == true): ?>
+	Userul <?=$_GET['username']?> a fost dezactivat.<br/>
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['user_not_set'] == true): ?>
+	Nu vrei sa dezacativezi nici un user?
+<?php else: if($page['nu exista'] == true): ?>
+	Userul cautat nu exista.
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: ?>
+	<h2>Dezactiveaza userul <a href="ucp/profil/username/<?=$_GET['username']?>"><?=$_GET['username']?></a> </h2><br/>
+	<form method="post" action="ucp/admin_dezactiveaza_cont/username/<?=$_GET['username']?>">
+		<input type="checkbox" name="sterge">
+		Esti sigur ca vrei sa dezactivezi userul <a href="ucp/profil/username/<?=$_GET['username']?>"><?=$_GET['username']?></a> ?
+		<br/><br/>
+		<input type="submit" value="Dezactiveaza">
+	</form>
+<?php endif;endif;endif;endif;endif;endif;endif; ?>

@@ -1,0 +1,33 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: if($page['not_allowed'] == true): ?>
+	Nu ai acces la aceasta pagina. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['fara_user'] == true): ?>
+	Trebuie sa specifici un username. <br/>
+	Sau inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['nu_exista'] == true): ?>
+	Trebuie sa specifici un username existent. <br/>
+	Sau inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['mod'] == true): ?>
+	Nu iti poti schimba propriul tip <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: ?>
+	<h3>Schimba tipul utilizatorului <a href="ucp/profil/username/<?=$_GET['username']?>"><?=$_GET['username']?></a></h3><br/><br/>
+<?php if($page['updated'] == true): ?>
+	Tipul fost modificat cu succes. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a><br/>
+<?php else: ?>
+	Tipul curent al utilizatorului: <?=$page['tip']?>
+	<form method="post" action="ucp/admin_schimba_tip/username/<?=$_GET['username']?>">
+		<select name="tip">
+		<?php foreach($page['tipuri'] as $c): ?>
+			<option value="<?=$c['id_tip']?>"><?=$c['nume_tip']?></option>
+		<?php endforeach; ?>
+		</select>
+		<br/><br/>
+		<input type="submit" value="Modifica">		
+	</form>
+<?php endif;endif;endif;endif;endif;endif; ?>
+

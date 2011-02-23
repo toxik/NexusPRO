@@ -1,0 +1,15 @@
+<?php if($page['not_allowed'] == true): ?>
+	Nu ai acces la aceasta pagina.
+<?php else: if($page['done'] == true): ?>
+	<?php redirect("http://nexuspro.info/index") ?>
+<?php else: if($page['fara_id'] == true): ?>
+	Adresa este gresita, nu ai specificat nici un id.
+<?php else: if($page['nu_exista'] == true): ?>
+	Anuntul cautat nu exista.
+<?php else: ?>
+	<h3>Sterge anuntul <?=$page['nume']?></h3><br/><br/>
+	<form action="/statice/sterge_anunt/id/<?=$_GET['id']?>" method="post">
+		<input type="checkbox" name="sterge"> Sterg anuntul <?=$page['nume']?>? <br/><br/>
+		<input type="submit" value="Sterge">
+		</form>
+<?php endif;endif;endif;endif; ?>

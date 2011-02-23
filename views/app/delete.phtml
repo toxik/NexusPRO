@@ -1,0 +1,17 @@
+<h2>Aplicaţii</h2>
+<h3>Ştergere aplicaţii</h3>
+<?php
+if ($page['access']):
+if (isset($_POST['confirm'])) { ?>
+	<p>Aplicatia a fost indepartata cu succes.</p>
+	<p>Fisierele vor ramane in continuare disponibile pentru utilizatorii care au cumparat-o.</p>
+<?php } else { ?>
+	<form method="post">
+	<input type="checkbox" name="confirm" id="confirm" />
+	<label for="confirm">Sunteti sigur(a) ca doriti sa stergeti aceasta aplicatie?</label>
+	<input type="submit" value="Da" />
+	</form>
+<?php } 
+else: ?>
+<p>Nu puteti sa stergeti aceasta aplicatie deoarece nu aveti permisiunea necesara.</p>
+<?php endif; ?>

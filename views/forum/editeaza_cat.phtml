@@ -1,0 +1,26 @@
+<?php if($page['not_logged_in']):?>
+	<?=$page['not_logged_in']?> <br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else : if($page['not_allowed']): ?>
+	<?=$page['not_allowed']?>
+<?php else : if($page['err']): ?>
+	<?=$page['err']?><br/>
+	<a href="/forum/index">Inpoi la index</a>
+<?php else :if($page['modificat']):?>
+		<?php redirect('/forum/index'); ?>
+<? else: ?>
+	<h3>Editeaza numele si descrierea categoriei </h3>
+	<?php if($page['inf']): ?>
+	<br/><?=$page['inf']?>
+	<?php endif; ?>
+	<br/><br/>
+	<form action="/forum/editeaza_cat/id/<?=$_GET['id']?>" method="post">	
+		Nume: <br><input type="text" name="nume" value="<?=$page['nume']?>" size="64"><br/>			
+		Descriere:<br/> 
+		<textarea name="desc" rows="4" cols="48"><?=$page['desc']?></textarea><br/><br/>
+		<input type="submit" value="Modifica">
+	</form>
+	<br/>
+<? endif;endif;endif;endif; ?>
+				
+	

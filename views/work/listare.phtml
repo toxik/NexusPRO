@@ -1,0 +1,32 @@
+<? if(!$page['subcat']): ?>
+<div id="cat_menu">
+<? else: ?>
+<div id="dis_cat_menu">
+<small><a href="work/listare/id/<?=$page['subcat']['id']?>">
+	Mai sus o categorie (<?=$page['subcat']['name']?>)</a></small>
+<? endif; ?>
+	<?=$page['subcategorii']?>
+	<div style="clear: both"></div>
+</div>
+<? 
+if ($page['projects']): ?>
+<table class="full zebra">
+<tr>
+	<th style="width: 25%">Nume</th>
+	<th>Descriere</th>
+	<th style="width: 25%">Info</th>
+</tr>
+<? foreach($page['projects'] as $project): ?>
+<tr>
+	<td><a href="bid/show/project_id/<?=$project['project_id']?>"><?=stripslashes($project['project_name'])?></a></td>
+	<td><?=stripslashes($project['project_description'])?></td>
+	<td>Cerut de către <a href="ucp/profil/username/<?=$project['user_name']?>">
+		<?=$project['user_first_name'].' '.$project['user_last_name']?></a><br />
+		La data: <em><?=substr($project['req'],0,10)?></em>
+		</a></td>
+<? endforeach; ?>
+</table>
+<? else: 
+if ($page['subcat']): ?>
+<p>Nu sunt proiecte in această categorie.</p>
+<? endif; endif; ?>

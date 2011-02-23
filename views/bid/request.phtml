@@ -1,0 +1,35 @@
+<h2>Cerere proiect</h2>
+<h3>Completare formular</h3>
+<?php if(isset($page['content'])) echo $page['content']; ?>
+<?php if($page['form']==true): ?>
+<!-- Request table starts here:-->
+<form method="post" onsubmit="return validate_form(this)">
+Completeaza numele proiectul si descrierea a ceea ce trebuie sa faca in cat mai multe detalii posibile pentu a se putea stabili clar cerintele programului.<br/><br/>
+<span style="color:#0054a6; font-weight: bold">Nota:</span> Cand aplici pentru proiect ti se vor scadea 10 credite pentru preevaluarea de catre un specialist.<br/><br/>
+
+<table border="5" style="text-align:center">
+<tr>
+	<td>Nume proiect</td><td><input size="53" name="project_name" type="text" value="<?=$_POST['project_name']?>" /></td>
+</tr>
+<tr>
+	<td>Categorie</td>
+	<td align="left">
+		<select name="projcat_id">
+			<?=$page['select_cats']?>
+		</select>
+	</td>
+<tr>
+	<td>Descriere</td><td><textarea name="project_description" cols="40" rows="4">Descriere proiect...</textarea></td>
+</tr>
+<?php  if (isset($page['error'])) echo '
+<tr>
+	<td colspan="2" width="400"><b style="color:red"> Eroare: '.$page['error'].'</b></td>
+</tr>'; ?>
+<tr>
+	<td colspan="2"><input type="submit" value="Aplica cerere proiect" /></td>
+</tr>
+</table>
+</form>
+
+<!-- Request table ends here.-->
+<?php endif; ?>

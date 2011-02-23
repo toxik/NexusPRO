@@ -1,0 +1,30 @@
+<h2>Căutare</h2>
+<?php if($page['info']): ?>
+<p style="font-size: small"><?=$page['info']?></p>
+<?php endif; ?>
+<form method="get" action="cauta/index/" class="txk">
+	<fieldset>
+	<input type="text" name="s" value="<?=$_GET['s']?>" class="large"/>
+	<input type="submit" value="Caută!" />
+	</fieldset>
+	<div style="" id="categories">
+		<h4>Căutare pe categorii<? if (!$page['hideCat']): ?> <em style="color: lightblue">activă</em><? endif; ?></h4>
+		<div style="display: none"><?=$page['checkbox_cats']?></div>
+	</div>
+</form>
+<!--<p style="font-size: small">Căutarea a durat <?=Search::$searchTime?> secunde</p>
+-->
+<div id="searchResults">
+<span id="results">Rezultate: <?=$page['nrRezultate']?></span>
+	<em><?=($page['nrRezultate'] > 8?' - scroll in jos pentru urmatoarele rezultate':'')?></em>
+<? 
+if ($page['results'])
+foreach($page['results'] as $result): ?>
+	<div class="<?=$result['type']?> result" rel="<?=$result['order']?>">
+		<a href="<?=$result['link']?>"><?=$result['linkText']?></a> 
+			<em style="padding-left: 10px"> - <?=$result['info']?></em><br /><br />
+		<?=$result['desc']?>
+	</div>
+<? endforeach; ?>
+<div id="spinner"><img src="/template/img/loading.gif" /><br />Se încarcă rezultate..</div>
+</div>

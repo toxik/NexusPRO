@@ -1,0 +1,20 @@
+<?php if($page['not_allowed'] == true): ?>
+	Nu ai acces la aceasta pagina.
+<?php else: if($page['done'] == true): ?>
+	<?php redirect("http://nexuspro.info/index") ?>
+<?php else: ?>
+	<h2>Adauga anunt</h2>
+	<?php if($page['incomplet'] == true): ?>
+		<br/>Trebuie completate toate campurile.
+	<?php endif; ?>
+	<br/><br/>
+	<form method="post" action="statice/adauga_anunt">
+		Titlu: <br/>
+		<input type="text" name="titlu" size="64" value="<?$_POST['titlu']?>"><br/>
+		Text: <br/>
+		<textarea name="text" cols="48" rows="4"><?=$_POST['text']?></textarea>
+		<br/><br/>
+		<input type="submit" value="Adauga">
+		
+	</form>
+<?php endif;endif; ?>

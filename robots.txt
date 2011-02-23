@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /inc/
+Disallow: /modules/
+Disallow: /search_index/
+Disallow: /template/
+Disallow: /trash/
+Disallow: /views/

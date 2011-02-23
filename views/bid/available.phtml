@@ -1,0 +1,24 @@
+<h3>Proiecte la care poti licita</h3><br/>
+Selecteaza un proiect pentru a putea a putea licita pentru acesta. <br/><br/>
+<?php
+
+if ($page['error']!="") echo $page['error'];
+
+if (count($page['lista'])==0)
+	echo "Nu exista proiecte in licitatie deocamdata!"; 
+else
+{
+	echo "<table width='70%'><tr style='font-weight: bold;'><td>Client</td><td>Nume Proiect</td><td>Data cererii</td></tr>";
+	
+	for ($i=0; $i<count($page['lista']); $i++)
+	{
+		echo "<tr><td><a href='bid/show/project_id/".$page['lista'][$i]['project_id']."'>";
+		echo stripslashes($page['lista'][$i]['project_name'])."</a></td>";
+		echo "<td><a href='ucp/profil/username/".$page['lista'][$i]['user_name']."'>";
+		echo stripslashes($page['lista'][$i]['user_name'])."</a></td>";
+		echo "<td>".stripslashes($page['lista'][$i]['project_requested'])."</td></tr>";
+	}
+	
+	echo "</table>\n";
+}
+?>

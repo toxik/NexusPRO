@@ -1,0 +1,40 @@
+<h2>Aplicaţii</h2> 
+<h3>Adaugă aplicaţie</h3>
+<?php if (!$_SESSION['logat']) {
+	echo 'Acces interzis. Puteti accesa aceasta resursa doar daca sunteti logat(a).';
+	return;
+ }
+?>
+<?php if ($page['fail'] && $page['process']): ?>
+<ul class="errors">
+	<?php
+		foreach($page['errors'] as $error)
+			echo '<li>'.$error.'</li>';
+	?>
+</ul>
+<?php endif; ?>
+
+<?php if (($page['fail'] && $page['process']) || !$page['process']): ?>
+<form action="app/add" method="post" enctype="multipart/form-data" class="txk">
+	<fieldset>
+		<label for="app_name">Nume aplicatie</label>
+		<input type="text" name="app_name" id="app_name" value="<?=$_POST['app_name']?>"/>
+		<label for="app_description">Descriere aplicatie</label>
+		<textarea name="app_description" id="app_description"><?=$_POST['app_description']?></textarea>
+		<label for="app_keywords">Cuvinte cheie</label>
+		<input type="text" name="app_keywords" id="app_keywords" value="<?=$_POST['app_keywords']?>"/>
+		<label for="app_plang">Limbaj(e) de programare</label>
+		<input type="text" name="app_plang" id="app_plang" value="<?=$_POST['app_plang']?>"/>
+		<label for="app_price">Pret aplicatie</label>
+		<input type="text" name="app_price" id="app_price" class="small" value="<?=$_POST['app_price']?>"/>
+		<label for="app_filename">Sursa / arhiva cu aplicatia</label>
+		<input type="file" name="app_filename" id="app_filename"/>
+		
+		<br /><input type="submit" value="Adauga aplicatie" class="submit" />
+	</fieldset>
+</form>
+<?php else: ?>
+	<h4>Felicitari!</h4>
+	<p>Aplicatia dvs. a fost inregistrata si este acum vizibila pentru toti utilizatorii acestui site.<br />
+	Va multumim.</p>
+<?php endif; ?>

@@ -1,0 +1,96 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: ?>
+	<div style="text-align:center"><h2>Control Panel: <a href="ucp/profil/username/<?=$page['username']?>"><?=$page['username']?></a></h2></div>
+	
+	<?php if($page['nr_msg'] > 0): ?>
+	Ai <?=$page['nr_msg']?> <?php if($page['nr_msg'] == 1): ?>mesaj<?php else:?>mesaje<?php endif; ?>. Mergi la <a class="chat_link" href="statice/eroare/nojs">Chat</a><br/><br/>
+	<?php endif; ?><br/>
+	<h3><a href="ucp/profil/username/<?=$page['username']?>">Vezi profil</a></h3><br/>
+	<h3>Informatii credit</h3><br/>
+	<table>
+		<tr>
+			<td style="font-weight: bold;">Credit curent</td>
+			<td><?=$page['credit']?>&nbsp; &nbsp; &nbsp; <span style="font-weight: bold"><a href="ucp/cumpara_credit">Cumpara credit</a></span></td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold;">Suma castigata</td>
+			<td><?=$page['castigat']?></td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold; width: 120px;">Suma cheltuita</td>
+			<td><?=$page['cheltuit']?></td>
+		</tr>
+	</table>
+	<br/>
+	<h3>Informatii programe</h3><br/>
+	<div class="titlu">Istoric programe vandute</div>
+	<div class="togglebox">
+		<div class="content">
+		<?php if(count($page['istoric']) == 0): ?>
+			Nu exista programe vandute.
+		<?php endif; ?>
+		
+		<?php foreach($page['istoric'] as $c):?>
+			<table style="width: 100%; margin-bottom: 5px;">
+				<tr>
+					<td>Aplicatie: <a href="app/show/id/<?=$c['id_app']?>"><?=$c['nume_app']?></a></td>
+					<td style="text-align: center">Cumparator: <a href="ucp/profil/username/<?=$c['nume_cump']?>"><?=$c['nume_cump']?></a></td>
+					<td style="text-align: right">Data cumpararii: <?=$c['data_cump']?></td>
+				</tr>
+			</table>
+		<?php endforeach; ?>
+		</div>
+	</div>
+	<div class="titlu">Proiecte cumparate in desfasurare</div>
+	<div class="togglebox">
+		<div class="content">
+		<?php if(count($page['in_desf']) == 0): ?>
+			Nu ai proiecte cumparate in desfasurare.
+		<?php endif; ?>
+		
+		<?php foreach($page['in_desf'] as $c):?>
+			<table style="width: 100%; margin-bottom: 5px;">
+				<tr>
+					<td>Nume: <a href="bid/show/project_id/<?=$c['id_prj']?>"><?=$c['nume_prj']?></a></td>
+					<td> </td>
+					<td width="33%">Status: <?=$page['status'][$c['status_prj']]?></td>
+				</tr>
+			</table>
+		<?php endforeach; ?>
+		</div>
+	</div>
+	<?php if($page['fara_lucru'] == false): ?>
+		<div class="titlu">Proiecte in lucru</div>
+		<div class="togglebox">
+			<div class="content">
+			<?php if(count($page['in_lucru']) == 0): ?>
+				Nu ai proiecte in lucru.
+			<?php endif; ?>
+			
+			<?php foreach($page['in_lucru'] as $c):?>
+				<table style="width: 100%; margin-bottom: 5px;">
+					<tr>
+						<td width="33%">Nume: <a href="bid/show/project_id/<?=$c['id_prj']?>"><?=$c['nume_prj']?></a></td>
+						<td width="33%"> </td>
+						<td width="33%">Status: <?=$page['status'][$c['status_prj']]?></td>
+					</tr>
+				</table>
+			<?php endforeach; ?>
+			</div>
+		</div>
+	<?php endif; ?>
+	<br/><br/>
+	<h3>Modifica informatii cont </h3><br/>
+    <a href="ucp/schimba_parola">Schimba parola</a><br/>
+	<a href="ucp/schimba_contact">Schimba datele de contact</a> <br/>
+	&nbsp; &nbsp; &nbsp; &nbsp; <span style="font-size: 10px;">e-mail,telefon,website</span><br/>
+	<a href="ucp/schimba_info">Schimba informatiile personale </a><br/>
+	&nbsp; &nbsp; &nbsp; &nbsp; <span style="font-size: 10px;">nume,prenume,cnp,adresa</span><br/>
+	<a href="ucp/dezactiveaza_cont">Deazactiveaza contul</a>
+	<br/><br/>
+	
+	
+	
+<?php endif; ?>

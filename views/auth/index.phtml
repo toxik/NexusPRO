@@ -1,0 +1,35 @@
+<?php if ($page['afiseaza_formular']): ?>
+
+<!-- Start of login table: -->
+<form method="post" action="auth/index" onsubmit="return validate_form(this)">
+<table border="5" style="text-align: center">
+	<tr>
+		<th colspan="2">Login:</th>
+	</tr>
+	<tr>
+		<td>Username:</td>
+		<td><input name="user" type="text" value=""/></td>
+	</tr>
+	<tr>
+		<td>Password:</td>
+		<td><input name="pass" type="password" /></td>
+	</tr>
+	<?php  if (isset($page['error'])) echo '
+	<tr>
+		<td colspan="2" width="260"><b style="color:red"> Eroare: '.$page['error'].'</b></td>
+	</tr>
+	'; ?>
+	<tr>
+		<td colspan="2"><a href="/auth/signup">Nu esti membru?<br />Inregistreaza-te!</a></td>
+	</tr>
+	<tr>
+		<td colspan="2"><input value="Logeaza-te!" type="submit" /></td>
+	</tr>
+</table>
+</form>
+<!-- End of login table. -->
+
+<?php endif; ?>
+<?php if(!isset($page['afiseaza_formular'])): ?>
+<?php echo '<p>'.$page['welcome'].'</p>'; ?>
+<?php endif; ?>

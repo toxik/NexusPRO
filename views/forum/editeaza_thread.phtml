@@ -1,0 +1,27 @@
+<?php if($page['not_logged_in']):?>
+	<center> 
+		<?=$page['not_logged_in']?> <br/>
+		<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+	</center>
+<?php else : if($page['err']): ?>
+	<?=$page['err']?><br/>
+	<a href="forum/categorie/id/<?=$_GET['cat_id']?>">Inapoi la categorie</a> sau 
+	<a href="forum/index">inapoi la index</a>
+<?php else : if($page['nu_exista']): ?>
+	<?=$page['nu_exista']?><br/>
+	<a href="forum/categorie/id/<?=$_GET['cat_id']?>">Inapoi la categorie</a> sau 
+	<a href="forum/index">inapoi la index</a>
+<?php else: if($page['done']): ?>
+		<?php redirect('forum/categorie/id/'.$_GET['cat_id'].''); ?>
+<?php else: ?>
+	<h3>Editeaza thread</h3>
+	<?php if($page['fara_titlu']): ?>
+		<br/><?=$page['fara_titlu']?>
+	<?php endif; ?>
+	<br/><br/>
+	<form action="forum/editeaza_thread/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>" method="post">
+		Titlu: <br/><input type="text" name="titlu" value="<?=$page['nume']?>" size="64"><br/><br/>
+		<input type="submit" value="Modifica">
+	</form><br/>
+	<h3>Inapoi la <a href="forum/index">Index</a> sau la <a href="forum/categorie/id/<?=$_GET['cat_id']?>">Categorie</a></h3>
+<?php endif;endif;endif;endif; ?>

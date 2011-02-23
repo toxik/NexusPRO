@@ -1,0 +1,282 @@
+<h2>Detalii proiect</h2><br/>
+
+<?php if($page['show_error']!="") echo "<b style='color:red'>Error: ".$page['error']."</b>";?>
+<?php if($page['show_page']):?>
+	<h3><?=$page['bid']['project_name']?></h3>
+	<div style="padding-left: 20px;"><span  style="font-weight: bold">Client: </span><a href="ucp/profil/username/<?=$page['bid']['user_name']?>"><?=$page['bid']['user_name']?></a>
+	&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/statice/eroare/nojs" class="goChat" rel="<?php echo $page['bid']['user_name']?>">Contacteaza</a></div>
+	<br/>
+	<h3>Informatii furnizate de client</h3>
+	<table width="70%">
+		<tr>
+			<td style="font-weight: bold">Descriere</td>
+			<td><?=$page['bid']['project_description']?></td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold; width: 150px;">Data cererii</td>
+			<td><?=$page['bid']['project_requested']?></td>
+		</tr>
+	</table><br/>
+
+	<?php if($page['bid']['project_status']==0 and !$page['eval']): ?>
+		<h3>Rezultatele preanalizei</h3>
+		Proiectul asteapta preanaliza momentan.<br/>
+	<?php endif ?>
+	<?php if($page['bid']['project_status']==0 and $page['eval']): ?>
+		Vrei sa participi la acest proiect? Preanalizeaza acest proiect completand campurile de mai jos si vei primi 10 credite.<br/><br/>
+		<form action="/bid/show/project_id/<?php echo $_GET['project_id']; ?>" method="post">
+		<table width="50%">
+			<tr>
+				<td style="font-weight: bold">Cuvinte-cheie</td>
+				<td><input type="text" size="80" name="project_keywords" value="<?=$_POST['project_keywords']?>"></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Licenta</td>
+				<td><input type="text" name="project_licence" value="<?=$_POST['project_licence']?>"</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Limbaj</td>
+				<td><input type="text" name="project_plang" value="<?=$_POST['project_plang']?>" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Analiza</td>
+				<td><textarea cols="58" rows="10" name="analysis_description"><?php echo $_POST['analysis_description'];?></textarea></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Pret estimat</td>
+				<td><input size="5" type="text" name="analysis_estimated_price" value="<?=$_POST['analysis_estimated_price']?>" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Deadline estimat</td>
+				<td><input size="7" type="text" name="analysis_estimated_deadline" 
+			value="<?=$_POST['analysis_estimated_deadline']?>" /></td>
+			</tr>
+		</table>
+		<br/>
+		<br/>
+		<input type="submit" value="Evaluează proiect" />
+		</form>
+	<?php endif;?>
+	<?php if($page['bid']['project_status']>0): ?>
+		<h3>Rezultatele preanalizei</h3>
+		<div style="padding-left: 20px;"><span  style="font-weight: bold">Preanalist: </span><a href="ucp/profil/username/<?=$page['bid']['preanalist']?>"><?=$page['bid']['preanalist']?></a>
+		&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/statice/eroare/nojs" class="goChat" rel="<?php echo $page['bid']['preanalist']?>">Contacteaza</a></div><br/>
+		<table width="70%">
+			<tr>
+				<td style="font-weight: bold">Cuvinte-cheie</td>
+				<td><?=$page['bid']['project_keywords']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Licenta</td>
+				<td><?=$page['bid']['project_licence']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Limbaj</td>
+				<td><?=$page['bid']['project_plang']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Descriere</td>
+				<td><?=$page['bid']['analysis_description']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Pret estimat</td>
+				<td><?=$page['bid']['analysis_estimated_price']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold; width: 150px;">Deadline estimat</td>
+				<td><?=$page['bid']['analysis_estimated_deadline']?></td>
+			</tr>
+		</table>	
+	<?php endif; ?>
+	<br/>
+	<?php if($page['apply']==true):?>
+		<h3>Aplica pentru acest proiect</h3><br/>
+		<form method="post" action="/bid/show/project_id/<?php echo $_GET['project_id']; ?>">
+		<span style="font-weight: bold">Suma ceruta:</span> &nbsp; &nbsp; <input type="text" name="bid_price_offer" /><br/><br/>
+		<input type="checkbox" name="apply" value="true" id="vreaU" /><label for="vreaU">Vreau sa aplic la acest proiect!</label>
+		<td><input type="submit" value="Liciteaza!">
+		</form>
+	<?php endif; ?>
+	<?php if(isset($page['error'])):?>
+		<br/>
+		<span style="color:red; font-weight: bold">Eroare: <?php echo $page['error']; ?></span>
+		<br/>
+	<?php endif?>
+	<?php if($page['showStart']==false and $page['showStop']==true): ?>
+		<h3>Renunta la proiect</h3>
+		<form action="" method="post">
+			<input type="checkbox" name="action" value="stop" /> 
+			Vreau sa renunt. <input type="submit" value="Stop proiect!" />
+		</form>
+			<br/>
+	<?php endif ?>
+	<?php if($page['showStart']==true and $page['showStop']==true): ?>
+		<form action="" method="post" style="border: 1px solid #ddd; width: 150px; padding: 9px">
+			<h3>Renunta la proiect</h3>
+			<input type="radio" name="action" value="stop" id="STOP" /> 
+			<label for="STOP">Vreau sa renunt.</label>
+			<h3>Incepe proiect</h3>
+			<input type="radio" name="action" value="start" id="START"/>
+			<label for="START">Incepe proiect.</label><br /><br />
+			<input type="submit" value="Selecteaza!" />
+		</form>
+		<br/>
+	<?php endif ?>
+	<?php if(isset($page['content'])):?>
+		<h3>Informatii</h3>
+		<?php echo $page['content']; ?>
+		<br/><br/>
+	<?php endif; ?>
+	<?php if(abs($page['bid']['project_status'])>10):?>
+		<h3>Status proiect</h3>
+
+		<table>
+			<tr>
+				<td style="font-weight: bold">Status curent</td>
+				<td colspan="2">
+					<?php
+						if($page['bid']['project_status']==20) echo "analiza";
+						elseif($page['bid']['project_status']==30) echo "proiectare";
+						elseif($page['bid']['project_status']==40) echo "programare";
+						elseif($page['bid']['project_status']==50) echo "testare";
+						elseif($page['bid']['project_status']==-20) echo "analiza - pauza";
+						elseif($page['bid']['project_status']==-30) echo "proiectare - pauza";
+						elseif($page['bid']['project_status']==-40) echo "programare - pauza";
+						elseif($page['bid']['project_status']==-50) echo "testare - pauza";
+						else echo 'complet';
+					?>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold; width: 150px;" >Data începerii</td>
+				<td colspan="2"><?=$page['bid']['project_start']?></td>
+			</tr>
+			<?php if( abs($page['bid']['project_status']) >= 20): ?>
+			<tr>
+				<td style="font-weight: bold">Analist</td>
+				<td><? if ($page['name']['analyst']): ?>
+					<a href="ucp/profil/username/<?=$page['name']['analyst']?>"><?=$page['name']['analyst']?></a>
+					&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/statice/eroare/nojs" class="goChat" rel="<?php echo $page['name']['analyst']?>">Contacteaza</a> 
+					<?=$page['rating']['analyst']?>
+					<? else: echo '<em>Așteptare...</em>'; endif; ?>
+				</td>
+				<td><?=$page['dez']['analyst']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Proiectant</td>
+				<td><? if ($page['name']['planner']): ?>
+					<a href="ucp/profil/username/<?=$page['name']['planner']?>"><?=$page['name']['planner']?></a>
+					&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/statice/eroare/nojs" class="goChat" rel="<?php echo $page['name']['planner']?>">Contacteaza</a>
+					<?=$page['rating']['planner']?>
+					<? else: echo '<em>Așteptare...</em>'; endif; ?>
+				</td>
+				<td><?=$page['dez']['planner']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Programator</td>
+				<td><? if ($page['name']['programmer']): ?>
+					<a href="ucp/profil/username/<?=$page['name']['programmer']?>"><?=$page['name']['programmer']?></a>
+					&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/statice/eroare/nojs" class="goChat" rel="<?php echo $page['name']['programmer']?>">Contacteaza</a>
+					<?=$page['rating']['programmer']?>
+					<? else: echo '<em>Așteptare...</em>'; endif; ?>
+				</td>
+				<td><?=$page['dez']['programmer']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Tester</td>
+				<td>
+					<? if ($page['name']['tester']): ?>
+					<a href="ucp/profil/username/<?=$page['name']['tester']?>"><?=$page['name']['tester']?></a>
+					&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/statice/eroare/nojs" class="goChat" rel="<?php echo $page['name']['tester']?>">Contacteaza</a>
+					<?=$page['rating']['tester']?>
+					<? else: echo '<em>Așteptare...</em>'; endif; ?>
+				</td>
+				<td><?=$page['dez']['tester']?></td>
+			</tr>
+			<?php endif; ?>
+		</table><br/><br/>
+	<?php endif; ?>
+<?php endif; ?>
+
+<?php if($page['view_biddings']==true):?>
+	<h3>Licitatii curente pentru acest proiect</h3>
+	<form action="/bid/show/project_id/<?php echo $_GET['project_id']; ?>" method="post">
+	
+	<div>
+	<table border="5" style="text-align:center" class="full">
+<tr>
+	<th>Nume</th>
+	<th>Suma oferită</th>
+	<th>Detalii utilizator</th>
+	<th><?php
+if($page['bid']['user_id']==$_SESSION['user_id']) echo "Selecteaza";
+else echo "Optiuni"; ?></th>
+</tr>
+<?php
+// mirificul loc..ideea era aici sa modifici sa apra linkul pentru profil pe nume si sa modifici sa arate un pic bine
+for($j=2; $j<=5; $j++): ?>
+
+<?
+if ($j==2){ ?> <tr style='background: #FFF3A3'><th colspan='4' style="padding: 4px">Analişti
+	<?=($page['disables'][$j]?' <em>BLOCAT</em>':'') ?></th></tr> <? }
+if ($j==3){ ?> <tr style='background: #FFF3A3'><th colspan='4' style="padding: 4px">Proiectanţi
+	<?=($page['disables'][$j]?' <em>BLOCAT</em>':'') ?></th></tr> <? }
+if ($j==4){ ?> <tr style='background: #FFF3A3'><th colspan='4' style="padding: 4px">Programatori
+	<?=($page['disables'][$j]?' <em>BLOCAT</em>':'') ?></th></tr> <? }
+if ($j==5){ ?> <tr style='background: #FFF3A3'><th colspan='4' style="padding: 4px">Testeri
+	<?=($page['disables'][$j]?' <em>BLOCAT</em>':'') ?></th></tr> <? }
+
+$afisati = 0;
+for($i=0, $nr = count($page['biddings']); $i<$nr; $i++)
+	if ($page['biddings'][$i]['usertype_id']==$j)
+	{
+	$afisati++;
+	if($page['biddings'][$i]['bid_accepted']==1) echo "<tr style='background-color: #C7E4F9'>";
+	else echo "<tr>";
+	echo "<td><a href='ucp/profil/username/".$page['biddings'][$i]['user_name']."'>"
+		.$page['biddings'][$i]['user_name']."</a></td>
+	<td>".$page['biddings'][$i]['bid_price_offer']."</td>
+	<td>";
+	echo
+	"<a href='/statice/eroare/nojs' class='goChat' rel='".$page['biddings'][$i]['user_name']."'>Contacteaza pe Chat</a>";
+	echo "</td>
+	<td>";
+			if($page['bid']['user_id']==$_SESSION['user_id'] or $_SESSION['usertype_id']==6)
+			{
+				echo "<input name='select".$j."' value='".$page['biddings'][$i]['bid_id']."'";
+				if ($page['biddings'][$i]['bid_accepted']==1) echo ' checked="checked"';
+				if ($page['disables'][$j])
+					echo ' onclick="return false" ';
+				echo " type='radio' />";
+				if ($_SESSION['usertype_id']==6)
+					echo "<a href='bid/show/project_id/".$_GET['project_id']."/admdel/".
+					$page['biddings'][$i]['bid_id']."'> &#32;&#32;&#32; <b>x</b></a>";
+				$showButton="bidSelect";
+			}
+			elseif ($page['biddings'][$i]['user_id']==$_SESSION['user_id'])
+			{
+				echo "<input name='quitBid' value='true' type='checkbox' />";
+				$showButton="quit";
+			}
+			else echo "Aşteptare";
+	echo "</td>
+</tr>
+	";}
+if ($showButton=="quit")
+{
+	echo "<tr><td colspan='4'> Pentru a renunța la proiect bifeaza casuta din dreptul tau si da click pe butonul 
+	<input type='submit' value='Renunţă' /></td></tr>";
+	$showButton="false";
+} ?>
+<? if (!$afisati): ?>
+	<tr><td colspan="4">Nu au aplicat utilizatori din această categorie.</td></tr>
+<? endif; ?>
+<? endfor;
+if ($showButton=="bidSelect")
+	echo "<tr><td colspan='3'> <input type='checkbox' name='bidSelect' value='true' id='ALEG' /> 
+	<label for='ALEG'>Vreau sa aleg userii selectati! </label></td><td><input type='submit' value='Selecteaza' /></td></tr>";
+?>
+</table>
+</div>
+</form>
+<?php endif ?>

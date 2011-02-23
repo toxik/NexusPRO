@@ -1,0 +1,71 @@
+<?php if($page['not_logged_in']):?>
+		<?=$page['not_logged_in']?> <br/>
+		<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else : if($page['err']): ?>
+	<?=$page['err']?><br/>
+	<a href="forum/index">Inpoi la index</a>
+<?php else : if($page['cat_gresita']): ?>
+	<?=$page['cat_gresita']?><br>
+	<a href="forum/index">Inpoi la index</a>
+<?php else : if($page['pag_gresita']): ?>
+	<?=$page['pag_gresita']?> <br>
+	<a href="forum/categorie/id/<?=$_GET['id']?>/pag/1">Mergi la prima pagina</a>
+<?php else: ?>
+	<h3><a href="forum/index">Index</a> -- Categorie: <a href="forum/categorie/id/<?=$_GET['id']?>/pag/1"><?=$page['nume_cat']?></a></h3><br/><br/>
+	<h2><?=$page['nume_cat']?></h2>
+	<div style="width: 100%; text-align: right;">
+		<a href="forum/adauga_thread/cat_id/<?=$_GET['id']?>">Thread nou</a>
+	</div><br/>
+	<?php if($page['fara_thr']): ?>
+		Nu exista thread-uri in aceasta categorie.
+	<?php else: ?>
+	<?php foreach($page['content'] as $c): ?>
+		<div style="background-color: #FFF3A3; padding: 5px; border: 1px solid #FFDE00; width: 90%; margin: 3px;">
+			<table style="width: 100%; border: 1px solid #FFF;">
+				<?php if($page['perm'] == 'admin'): ?>
+					<tr style="font-size: 12px;text-align: right;">
+						<td style="width: 25%"> </td>
+						<td style="width: 25%"><a href="forum/editeaza_thread/cat_id/<?=$_GET['id']?>/thr_id/<?=$c['thread_id']?>">editeaza</a></td>
+						<td style="width: 25%"><a href="forum/sterge_thread/cat_id/<?=$_GET['id']?>/thr_id/<?=$c['thread_id']?>">sterge</a></td>
+						<td style="width: 25%"><a href="forum/inchide_thread/cat_id/<?=$_GET['id']?>/thr_id/<?=$c['thread_id']?>"><?php if($c['status'] == 1): ?>inchide<?php else: ?>deschide<?php endif; ?>
+							</a></td>					
+					</tr>
+				<?php endif; ?>
+				<tr>
+					<td colspan="4">
+						<a href="forum/thread/cat_id/<?=$_GET['id']?>/thr_id/<?=$c['thread_id']?>"><?=$c['nume']?></a>
+						<br/>
+						<?php if($c['status'] == 0): ?>
+							<span style="color: red; font-weight: bold">INCHIS</span><br/>
+						<?php endif; ?>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"> 
+						Autor: <a href="ucp/profil/username/<?=$c['user']?>"><?=$c['user']?></a>
+					</td>
+					<td colspan="2" style="text-align: right;"> 
+						Ultimul post: <?=$c['data_post']?>
+					</td>
+				</tr>
+			</table>
+		</div>
+	 <?php endforeach; ?> 
+	 <br/><br/>
+		<div style="width: 100%; text-align: center">
+			<div style="width: 50%">
+				<?php for($i = 1; $i <= $page['nr_pag']; $i++):?>
+						-
+						<?php if($i == $_GET['pag']): ?>
+							<?=$i?>
+						<?php else: ?>
+							<a href="forum/categorie/id/<?=$_GET['id']?>/pag/<?=$i?>">
+								<?=$i?>
+							</a>
+						<?php endif; ?>
+						-
+					
+				<? endfor; ?>
+			</div>
+		</div>
+<?php endif;endif;endif;endif;endif;?>

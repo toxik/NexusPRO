@@ -1,0 +1,40 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: ?>
+	<h2>Schimba datele de contact</h2><br/><br/>
+<?php if($page['updated'] == true): ?>
+	Datele au fost modificate cu succes. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a><br/>
+<?php else: ?>
+	<?php if($page['incomplet'] == true): ?>
+		Trebuie completate toate campurile. <br/><br/>
+	<?php endif; ?>
+	<?php if($page['email_gresit'] == true): ?>
+		Trebuie sa introduceti un e-mail corect. <br/><br/>
+	<?php endif; ?>
+	<?php if($page['tel_gresit'] == true): ?>
+		Numarul de telefon trebuie sa aiba cel putin 10 cifre. <br/><br/>
+	<?php endif; ?>
+	<form method="post" action="ucp/schimba_contact">
+				E-mail: <br/>
+				<input type="text" size="40" value="<?=$page['email']?>" name="email"><br/><br/>
+
+				Telefon :<br/>
+				<input type="text" size="40" value="<?=$page['tel']?>" name="tel"><br/><br/>
+			
+			<?php if($page['client'] == true): ?>
+				<input type="hidden" value="0" name="web">
+			<?php else: ?>
+			
+				Website :<br/>
+				<input type="text" size="40" value="<?=$page['web']?>" name="web"><br/><br/>
+				
+			<?php endif; ?>
+		<br/><br/>
+		<input type="submit" value="Modifica">
+		
+		
+	</form?
+<?php endif;endif; ?>
+	

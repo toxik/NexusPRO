@@ -1,0 +1,20 @@
+<?php if($page['not_logged_in']):?>
+	<?=$page['not_logged_in']?> <br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else : if($page['not_allowed']): ?>
+	<?=$page['not_allowed']?>
+<?php else : if($page['err']): ?>
+	<?=$page['err']?><br/>
+	<a href="forum/index">Inapoi la index</a>
+<?php else :?>
+	<?php if($page['done']): ?>
+		<?php redirect('/forum/index'); ?>
+	<?php else: ?>
+		<h3>Sterge categoria <?=$page['nume']?></h3><br/><br/>
+			<form action="/forum/sterge_cat/id/<?=$_GET['id']?>" method="post">
+			<input type="checkbox" name="sterge"> Sterg categoria <?=$page['nume']?>? <br/><br/>
+			<input type="submit" value="Sterge">
+			</form>
+			
+	<?php endif; ?>					
+<? endif;endif;endif; ?>

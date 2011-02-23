@@ -1,0 +1,42 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: if($page['not_allowed'] == true): ?>
+	Nu ai acces la aceasta pagina. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['fara_user'] == true): ?>
+	Trebuie sa specifici un username. <br/>
+	Sau inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['nu_exista'] == true): ?>
+	Trebuie sa specifici un username existent. <br/>
+	Sau inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: ?>
+	<h3>Schimba parola userului <?=$_GET['username']?></h3><br/><br/>
+<?php if($page['updated'] == true): ?>
+	Parola fost modificata cu succes. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a><br/>
+<?php else: ?>
+	<?php if($page['incomplet'] == true): ?>
+		Trebuie completate toate campurile. <br/><br/>
+	<?php endif; ?>
+	<?php if($page['lungime'] == true): ?>
+		Parola trebuie sa aiba minim 4 caractere. <br/><br/>
+	<?php endif; ?>
+	<?php if($page['diferite'] == true): ?>
+		Parola noua nu este aceeasi de ambele dati. <br/><br/>
+	<?php endif; ?>
+	<form method="post" action="ucp/admin_schimba_parola/username/<?=$_GET['username']?>">
+		<table width="400px">
+			<tr>
+				<td>Parola noua:</td>
+				<td><input type="password" name="pass_noua"></td>
+			</tr>
+			<tr>
+				<td>Repeta parola noua:</td>
+				<td><input type="password" name="pass_doi"></td>
+			</tr>
+		</table>
+		<br/><br/>
+		<input type="submit" value="Modifica">		
+	</form>
+<?php endif;endif;endif;endif;endif; ?>

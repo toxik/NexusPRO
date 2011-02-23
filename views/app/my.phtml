@@ -1,0 +1,27 @@
+<h2>Aplicaţii</h2>
+<h3>Informaţii despre aplicaţiile dvs.</h3>
+<?php if(!$_SESSION['logat']): ?>
+Nu puteti accesa aceasta pagina deoarece nu sunteti logat(ă)!
+<? return false; endif; ?>
+<?php if (!$page['apps']): ?>
+	<p>Nu ati urcat nicio aplicatie pe site.</p>
+	
+	
+<?php else: ?>
+	<table class="zebra full">
+	<tr>
+		<th>ID#</th><th>Nume</th><th>Limbaj(e)</th><th>Pret</th><th>Rating</th><th>Vanzari</th><th>Total castig</th>
+	</tr>
+	<? foreach ($page['apps'] as $app): ?>
+	<tr>
+		<td><?=$app['app_id']?></td>
+		<td><?=$app['app_name']?></td>
+		<td><?=$app['app_plang']?></td>
+		<td><?=$app['app_price']?></td>
+		<td><?=$app['app_rating']?></td>
+		<td><?=$app['vanzari']?></td>
+		<td><?=$app['total']?></td>
+	</tr>
+	<? endforeach; ?>
+	</table>
+<?php endif; ?>

@@ -1,0 +1,25 @@
+<h2>Pre-evaluare</h2>
+<h3>Listare proiecte neinspectate</h3>
+<?php if($page['analist']):?>
+<!-- Analist Bid List starts here: -->
+<div>
+<table border="5">
+<tr>
+	<th colspan="3">Lista de licitatii ce au nevoie de preevaluare:</th>
+</tr>
+	<?php
+        for($i=0, $nr = count($page['bids']); $i<$nr; $i++)
+		{
+			$url="/bid/show/project_id/".$page['bids'][$i]['project_id'];
+            echo "<tr><td><a href='".stripslashes($url)."'>".stripslashes($page['bids'][$i]['project_name'])."</a></td>";
+			echo "<td>".stripslashes($page['bids'][$i]['user_name'])."</td>";
+			echo "<td>".stripslashes($page['bids'][$i]['project_requested'])."</td>";
+			echo "</tr>
+			";
+		}
+	?>
+</table>
+</div>
+<!-- Analist Bid List ends here -->
+<?php endif?>
+<?php if($page['show_error']) echo "<b style='color:red'>Eroare: ".$page['error']."</b>";?>

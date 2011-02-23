@@ -1,0 +1,39 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: ?>
+	<h2>Schimba parola</h2><br/><br/>
+<?php if($page['updated'] == true): ?>
+	Parola fost modificata cu succes. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a><br/>
+<?php else: ?>
+	
+	<?php if($page['incomplet'] == true): ?>
+		Trebuie completate toate campurile. <br/><br/>
+	<?php endif; ?>
+	<?php if($page['parola_gresita'] == true): ?>
+		Parola veche nu este corecta. <br/><br/>
+	<?php endif; ?>
+	<?php if($page['lungime'] == true): ?>
+		Parola trebuie sa aiba minim 4 caractere. <br/><br/>
+	<?php endif; ?>
+	<?php if($page['diferite'] == true): ?>
+		Parola noua nu este aceeasi de ambele dati. <br/><br/>
+	<?php endif; ?>
+	<form method="post" action="ucp/schimba_parola">
+				Parola veche: <br/>
+				<input type="password" name="pass_veche"><br/><br/>
+			
+				Parola noua:<br/>
+				<input type="password" name="pass_noua"><br/><br/>
+
+				Repeta parola noua:<br/>
+				<input type="password" name="pass_doi"><br/><br/>
+			
+		<br/><br/>
+		<input type="submit" value="Modifica">
+		
+		
+	</form>
+<?php endif;endif; ?>
+	

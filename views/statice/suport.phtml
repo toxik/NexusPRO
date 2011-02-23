@@ -1,0 +1,42 @@
+<h2>Suport</h2>
+<br/><br/>
+<?php if($page['not_allowed'] == true): ?>
+	Trebuie sa fii logat pentru a beneficia de suport.<br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: ?>
+	<div style="float: right; width: 240px; padding-left: 20px;">	
+			<br/>
+			Pentru ajutor poti vorbi cu unul dintre administratori sau ii poti lasa un mesaj in cazul in care administratorul cautat nu este online.
+	</div>
+
+	<table class="full zebra" style="width: 60%">
+	<?php if(count($page['admin']) == 0): ?> 
+		Nu exista nici un admin.
+	<?php else: ?>
+		<tr>
+				<th>
+					Username
+				</th>
+				<th style="width: 40%">
+					Status
+				</th>
+			</tr>
+		<?php foreach($page['admin'] as $c): ?>
+			<tr>
+				<td>
+					<a href="ucp/profil/<?=$c['user']?>"><?=$c['user']?></a>
+				</td>
+				<td>
+					<?php if($c['on'] == true): ?>
+						<span style="color: green">ONLINE</span> - <a href="/statice/eroare/nojs" class="goChat" rel="<?=$c['user']?>">Chat</a>
+					<?php else: ?>
+						<span style="color: red">OFFLINE</span> - <a href="/statice/eroare/nojs" class="goChat" rel="<?=$c['user']?>">Lasa mesaj</a>
+					<?php endif; ?>
+				</td>
+
+			</tr>
+		<?php endforeach; ?>	
+	<?php endif; ?>
+	</table>
+	<div style="clear: both">&nbsp;</div>
+<?php endif; ?>

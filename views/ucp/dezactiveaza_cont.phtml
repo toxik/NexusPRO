@@ -1,0 +1,18 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: if($page['admin'] == true): ?>
+	Administratorul nu isi poate dezactiva singur contul. Contacteaza alt administrator pentru ajutor.<br/>
+	Inapoi la <a href="ucp/index">Control Panel</a>
+<?php else: if($page['pr_desf'] == true): ?>
+	Inca ai proiecte in desfasurare, nu iti poti dezactiva contul!
+<?php else: if($page['done'] == true): ?>
+	Contul a fost dezactivat.
+<?php else: ?>
+	<h2>Deactivare cont</h2><br/><br/>
+	<form method="post" action="ucp/dezactiveaza_cont">
+	<input type="checkbox" name="sterge"> Da, vreau sa imi dezactivez contul!
+	<br/><br/>
+	<input type="submit" value="Dezactiveaza">
+	</form>
+<?php endif;endif;endif;endif; ?>

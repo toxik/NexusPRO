@@ -1,0 +1,23 @@
+Sa se scrie predicate Prolog care :
+
+\1.Sa concateneze 2 liste 
+\2.Sa verifice daca o lista este multime 
+3.Sa transforme o lista in multime
+4.Sa calculeze intersectia , reuniunea si diferenta a 2 multimi 
+5.Sa insereze un element la inceputul unei liste , daca elementul nu se afla deja in lsita
+
+\6.Sa stearga un element dintr-o lista
+
+\7.Sa calculeze fact n , fib(n) si cmmdc(m,n)
+\8.Sa determine cate elemente are o lista
+9 . sa calculeze suma elementelor pozitive dintr-o lista de intregi .
+
+O maimuta se afla la usa de intrare intr-o camera. in mijlocul camerei se afla o banana 
+care atarna din tavan. Maimuta vrea sa culeaga banana dar este prea scunda pentru a o face.
+In dreptul ferestrei camerei se afla o cutie pe care maimuta o poate folosi. Maimuta poate
+executa urmatoarele actiuni:
+sa mearga pe podea, sa se suie pe cutie, sa impinga cutia prin camera atunci cand se afla in dreptul ei
+si sa culeaga banana daca se afla urcata pe cutie chiar in dreptul bananei.
+
+In aceste conditii maimuta poate sau nu sa intre in posesia bananei?
+

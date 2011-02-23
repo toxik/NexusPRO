@@ -1,0 +1,42 @@
+<h2>Aplicaţii</h2>
+<h3>Listare aplicaţii</h3>
+<?php if(!$page['entries']): ?>
+	<p>Nu exista inregistrari pe aceasta pagina</p>
+<?php else: ?>
+<table class="zebra full">
+<tr><th>Nume</th><th>Limbaje</th><th>Autor</th><th>Pret</th><th width="125">Nota</th><th width="165">Actiuni</th></tr>
+<?php foreach ($page['entries'] as $entry): ?>
+<tr>	
+	<td><a href="/app/show/id/<?=$entry['app_id']?>"><?=$entry['app_name']?></a></td>
+	<td><?=$entry['app_plang']?></td>
+	<td><a href="/ucp/profil/username/<?=$entry['user_name']?>"><?=$entry['user_first_name'].' '.$entry['user_last_name']?></a></td>
+	<td><?=$entry['app_price']?></td>
+	<td><?=$entry['rating']?>
+	</td>
+	<td>
+		<?php 
+			echo '<a href="/app/buy/id/'.$entry['app_id'].'">Buy</a> ';
+			if ($entry['own'])
+				echo '<a href="/down/app/id/'.$entry['app_id'].'">Download</a> ';
+			if ($entry['admin']) {
+				if ($entry['app_status']) 
+					echo '<a href="/app/delete/id/'.$entry['app_id'].'">Delete</a>';
+				else 
+					echo '<a href="/app/enable/id/'.$entry['app_id'].'">Enable</a>'; 
+			  }
+		?>
+	</td>
+</tr>
+<?php endforeach; ?>
+</table>
+	<?php // Paginatie -->
+	if ($page['nrPagini'] > 1) {
+		echo '<div style="margin-top: 25px">
+		Pagina: ';
+		for ($i = 1; $i <= $page['nrPagini']; $i++)
+			if ($page['pageNr'] != $i)
+				echo '<a href="/app/index/page/'.$i.'" class="thisPage">'.$i.'</a> ';
+			else echo $i.' ';
+		echo '</div>';
+	}
+endif; ?>

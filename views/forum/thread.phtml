@@ -1,0 +1,98 @@
+<?php if($page['not_logged_in']):?>
+		<?=$page['not_logged_in']?> <br/>
+		<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else : if($page['err']): ?>
+	<?=$page['err']?><br/>
+	<a href="forum/index">Inapoi la index</a>
+<?php else : if($page['cat_gresita']): ?>
+	<?=$page['cat_gresita']?><br/>
+	<a href="forum/categorie/id/<?=$_GET['cat_id']?>">Inapoi la categorie</a> sau 
+	<a href="forum/index">inapoi la index</a>
+<?php else : if($page['pag_gresita']): ?>
+	<?=$page['pag_gresita']?> <br/>
+	<a href="forum/thread/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>/pag/1">Mergi la prima pagina</a>
+<?php else : if($page['no_posts']): ?>
+	<?=$page['no_posts']?> <br/>	
+	<a href="forum/categorie/id/<?=$_GET['cat_id']?>">Inapoi la categorie</a> sau 
+	<a href="forum/index">inapoi la index</a>
+<?php else: ?>
+	<h3><a href="forum/index">Index</a> -- Categorie: <a href="forum/categorie/id/<?=$_GET['cat_id']?>/pag/1"><?=$page['nume_cat']?></a> -- Thread: <a href="forum/thread/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>"><?=$page['nume_thr']?></a></h3><br/><br/>
+	<h2><?=$page['nume_thr']?></h2>
+	<?php if($page['status'] == 0): ?>
+		<span style="color: red; font-size: 20px;">INCHIS</span>
+	<?php endif; ?>
+	<div style="width: 100%; text-align: right;">
+		<?php if($page['perm'] == admin): ?>
+			<a href="forum/inchide_thread/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>"><?php if($page['status'] == 1): ?>Inchide<?php else: ?>Deschide<?php endif; ?></a> &nbsp; &nbsp; &nbsp; &nbsp; 
+		<?php endif; ?>
+		<?php if($page['status'] == 1 || ($page['status'] == 0 && $page['perm'] == 'admin')): ?>
+			<a href="forum/adauga_post/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>">Adauga post</a>
+		<?php endif; ?>
+	</div><br/>
+	<?php foreach($page['content'] as $c): ?>
+		<div id="post-<?=$c['post_id']?>" style="background: #FFF3A3; padding: 5px; border: 1px solid #FFDE00; width: 90%; margin: 3px;">
+			<table style="width: 100%; border: 1px solid #FFF;">			
+				<?php if($page['perm'] == 'admin'): ?>
+					<tr style="font-size: 12px;text-align: right;">
+						<td style="width: 25%"> </td>
+						<td style="width: 25%">
+							<a href="forum/editeaza_post/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>/post_id/<?=$c['post_id']?>">editeaza</a>
+						</td>
+						<td style="width: 25%">
+							<a href="forum/sterge_toate/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>/user_id/<?=$c['user_id']?>">sterge user</a>
+						</td>
+						<td style="width: 25%">
+							<a href="forum/sterge_post/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>/post_id/<?=$c['post_id']?>">sterge</a>
+						</td>					
+					</tr>
+				
+				<?php else: if($c['user_m'] == true && $c['user_id'] == $_SESSION['user_id']): ?>
+					<tr style="font-size: 12px;text-align: right;">
+						<td style="width: 25%"> </td>
+						<td style="width: 25%"> </td>
+						<td style="width: 25%"> </td>
+						<td style="width: 25%">
+							<a href="forum/editeaza_post/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>/post_id/<?=$c['post_id']?>">editeaza</a>
+						</td>					
+					</tr>
+				<?php endif;endif;?>
+				<tr>
+					<td colspan="4">
+						Titlu: <?=$c['titlu']?>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"> 
+						Autor: <a href="ucp/profil/username/<?=$c['user']?>"><?=$c['user']?></a>
+					</td>
+					<td colspan="2" style="text-align: right;"> 
+						Data: <?=$c['data_c']?>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="border-top: 1px solid #FFF">
+											<br/>
+						<?=$c['text']?>
+					</td>
+				</tr>
+			</table>
+		</div>
+	 <?php endforeach; ?> 
+	 <br/><br/>
+		<div style="width: 100%; text-align: center">
+			<div style="width: 50%">
+				<?php for($i = 1; $i <= $page['nr_pag']; $i++):?>
+						-
+						<?php if($i == $_GET['pag']): ?>
+							<?=$i?>
+						<?php else: ?>
+							<a href="forum/thread/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>/pag/<?=$i?>">
+								<?=$i?>
+							</a>
+						<?php endif; ?>
+						-
+					
+				<? endfor; ?>
+			</div>
+		</div>
+<?php endif;endif;endif;endif;endif;?>

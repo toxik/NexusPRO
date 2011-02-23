@@ -1,0 +1,37 @@
+<?php if (isset($page['error'])): ?>
+<b style="color:red">Eroare: <?php echo $page["error"];?></b>
+<?php endif ?>
+<h3>Lista proiecte personale</h3><br/>
+
+<table width="70%">
+<tr style="font-weight: bold;">
+	<td>Nume</td>
+	<td>Data cererii proiectului</td>
+	<td>Status</td>
+</tr>
+<?php
+for ($i=0; $i<count($page['project']); $i++)
+{
+	echo "<tr>
+	<td><a href='bid/show/project_id/".$page['project'][$i]['project_id']."'>".
+	$page['project'][$i]['project_name']."</td>
+	<td>".$page['project'][$i]['project_requested']."</td>";
+	
+	if($page['project'][$i]['project_status']==0) echo "<td>pre-evaluare</td>";
+	elseif($page['project'][$i]['project_status'] == 10) echo "<td>licitatie</td>";
+	elseif($page['project'][$i]['project_status'] == 20) echo "<td>analiza</td>";
+	elseif($page['project'][$i]['project_status'] == 30) echo "<td>proiectare</td>";
+	elseif($page['project'][$i]['project_status'] == 40) echo "<td>programare</td>";
+	elseif($page['project'][$i]['project_status'] == 50) echo "<td>testare</td>";
+	elseif($page['project'][$i]['project_status'] == -20) echo "<td>analiza - pauza</td>";
+	elseif($page['project'][$i]['project_status'] == -30) echo "<td>proiectare - pauza</td>";
+	elseif($page['project'][$i]['project_status'] == -40) echo "<td>programare - pauza</td>";
+	elseif($page['project'][$i]['project_status'] == -50) echo "<td>testare - pauza</td>";
+	else echo "<td>complet</td>";
+	
+	
+	echo "</tr>";
+}
+
+?>
+</table>

@@ -1,0 +1,24 @@
+<?php if($page['not_logged_in']):?>
+	<?=$page['not_logged_in']?> <br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else : if($page['not_allowed']): ?>
+	<?=$page['not_allowed']?><br/>
+	<a href="/forum/categorie/id/<?=$_GET['cat_id']?>">Inapoi la categorie</a> sau 
+	<a href="/forum/index">inapoi la index</a>
+<?php else : if($page['err']): ?>
+	<?=$page['err']?><br/>
+	<a href="/forum/categorie/id/<?=$_GET['cat_id']?>">Inapoi la categorie</a> sau 
+	<a href="/forum/index">inapoi la index</a>
+<?php else :?>
+	<?php if($page['done']): ?>
+		<?php redirect('forum/categorie/id/'.$_GET['cat_id'].''); ?>
+	<?php else: ?>
+			<h3>Sterge thread</h3><br/><br/>
+			<form action="/forum/sterge_thread/thr_id/<?=$_GET['thr_id']?>/cat_id/<?=$_GET['cat_id']?>" method="post">
+			<input type="checkbox" name="sterge"> Sterg thread-ul <?=$page['nume']?>?<br/><br/>
+			<input type="submit" value="Sterge">
+			</form>
+			<br/>
+			<h3>Inapoi la <a href="forum/index">Index</a> sau la <a href="forum/categorie/id/<?=$_GET['cat_id']?>">Categorie</a></h3>
+	<?php endif; ?>					
+<? endif;endif;endif; ?>

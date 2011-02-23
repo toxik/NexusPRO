@@ -1,0 +1,22 @@
+<?php if($page['not_logged_in']):?>
+	<?=$page['not_logged_in']?> <br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else : if($page['not_allowed']): ?>
+	<?=$page['not_allowed']?>
+	<a href="/forum/index">Inpoi la index</a>
+<?php else : if($page['done']): ?>
+	<?php redirect('/forum/index'); ?>
+<?php else: ?>
+	<h3>Adauga o categorie</h3>
+	<?php if($page['err'])?>
+		<br/><?=$page['err']?>
+	<?php endif; ?>
+	<br/><br/>
+	<?=$page['content']?><br/><br/>
+	<form action="/forum/adauga_cat" method="post">	
+		Nume: <br/><input type="text" name="nume" size="64"><br/>			
+		Descriere:<br/> 
+		<textarea name="desc" rows="4" cols="48"></textarea><br/><br/>
+		<input type="submit" value="Adauga">
+	</form>	
+<? endif;endif; ?>

@@ -1,0 +1,120 @@
+<?php if($page['not_logged_in']): ?>
+	<?=$page['not_logged_in']?><br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else: if($page['fara_id'] == true): ?>
+	Nu exista user fara username!<br/>
+	Inapoi la <a href="ucp/index">Control Panel</a> 
+<?php else: if($page['nu_exista'] == true): ?>
+	Userul cautat nu exista. <br/>
+	Inapoi la <a href="ucp/index">Control Panel</a> 
+<?php else: ?>
+	<h2><p align="center">Informatii despre <a href="ucp/profil/username/<?=$_GET['username']?>"><?=$page['username']?></a></p></h2>
+	<br/><br/>
+	<h3>Informatii generale</h3><br/>
+	<table width="70%" style="font-size: 15px">
+		<tr>
+			<td width="60%">
+				<span style="font-weight: bold">Nume:</span> <?=$page['last_name']?> 
+			</td>
+			<td width="10%">&nbsp;</td>
+			<td>
+				<i><?=$page['type']?></i>
+			</td>
+		</tr>
+		<tr>
+			<td width="60%">
+				<span style="font-weight: bold">Prenume:</span> <?=$page['first_name']?>
+				
+			</td>
+			<td width="10%">&nbsp;</td>
+			<td><?=$page['rating']?></td>
+		</tr>
+		<tr>	
+			<td colspan="3">
+				<?php if($page['web_ok'] == true): ?>
+					<span style="font-weight: bold">Website:</span> <?=$page['website']?> 
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<br/><span style="font-weight: bold"><a href="/statice/eroare/nojs" class="goChat" rel="<?=$page['username']?>">Chat cu <?=$page['username']?></a></span>
+			</td>
+		</tr>
+	</table><br/>
+	
+	
+	<?php if($page['admin'] == true): ?>
+		<br/><h3>Informatii de administrare: </h3><br/>
+		<a href="ucp/admin_dezactiveaza_cont/username/<?=$_GET['username']?>">Dezactiveaza contul</a><br/>
+		<a href="ucp/admin_schimba_parola/username/<?=$_GET['username']?>">Schimba parola</a><br/>
+		<a href="ucp/admin_schimba_tip/username/<?=$_GET['username']?>">Schimba tipul</a><br/>
+		<br/>
+		<table width="400"  style="font-size: 15px">
+			<tr>
+				<td style="font-weight: bold">CNP: </td>
+				<td><?=$page['cnp']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">E-mail: </td>
+				<td><?=$page['email']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold"><Telefon: /td>
+				<td><?=$page['phone']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Adresa: </td>
+				<td><?=$page['address']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Credit: </td>
+				<td><?=$page['credit']?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold">Suma cheltuita: </td>
+				<td><?=$page['cheltuit']?></td>
+			</tr>
+			<tr>
+				<td style="width: 120px;font-weight: bold">Suma castigata: </td>
+				<td><?=$page['castigat']?></td>
+			</tr>
+		</table>
+	<?php endif; ?>
+	<br/>
+	
+	<h3>Activitate pe forum: </h3><br/>
+	<p style="font-size: 15px; padding-left: 20px;">
+	Postari (<a href="forum/viewposts/user_id/<?=$_GET['user_id']?>"><?=$page['posts']?></a>) <br/>
+	Threaduri (<a href="forum/viewthreads/user_id/<?=$_GET['user_id']?>"><?=$page['threads']?></a>) <br/>
+	</p>
+	<br/>
+	
+	<table width="100%" style="font-size: 15px;">
+		<tr valign="top">
+			<td width="33%">
+				<h3>Aplicatii (<?=count($page['aplicatii'])?>)</h3>
+				<br/>
+				<?php foreach($page['aplicatii'] as $c): ?>
+					<a href="app/show/id/<?=$c['id']?>"><?=$c['nume']?><br/>
+				<?php endforeach; ?>
+			</td>
+			<td width="33%">
+				<h3>Proiecte cumparate (<?=count($page['proiecte_cumparate'])?>)</h3>
+				<br/>
+				<?php foreach($page['proiecte_cumparate'] as $c): ?>
+					<a href="bid/show/project_id/<?=$c['id']?>"><?=$c['nume']?></a><br/>
+				<?php endforeach; ?>
+			</td>
+			<?php if($page['type'] != 'Client' && $page['type'] != 'Administrator' ): ?>
+			<td>
+				<h3>Proiecte la care participa (<?=count($page['proiecte'])?>)</h3>
+				<br/>
+				<?php foreach($page['proiecte'] as $c): ?>
+					<a href="bid/show/project_id/<?=$c['id']?>"><?=$c['nume']?></a><br/>
+				<?php endforeach; ?>
+			</td>
+			<?php endif; ?>
+		</tr>
+	</table>
+<?php endif;endif;endif; ?>

@@ -1,0 +1,26 @@
+<h2>Contact</h2>
+<br/><br/>
+
+<?php if($page['done']): ?>
+	<br/><h3>Mesajul a fost trimis.</h3>
+<?php endif; ?>
+<?php if($page['incomplet'] == true): ?>
+	<br/>Trebuie completate toate campurile.<br/>
+<?php endif; ?>
+<?php if($page['email_gresit'] == true): ?>
+	<br/>E-mailul trebuie sa fie valid.<br/>
+<?php endif; ?>
+<?php if($page['gresit'] == true): ?>
+	<br/>Captcha gresit.<br/>
+<?php endif; ?>
+	<br/>
+	<form action="statice/contact" method="post">		
+		E-mail: <br/><input type="text" name="mail" size="64" value="<?=$_POST['mail']?>"><br/>	
+		Titlu mesaj: <br/><input type="text" name="titlu" size="64" value="<?=$_POST['titlu']?>"><br/>		
+		Mesaj:<br/> 
+		<textarea name="mesaj" rows="4" cols="48"><?=$_POST['mesaj']?></textarea><br/><br/>
+		<script type="text/javascript">var RecaptchaOptions = { theme : "clean" };</script> 
+		<?=$page['captcha']?>
+		<br/>
+		<input type="submit" value="Trimite">
+	</form><br/>

@@ -1,0 +1,22 @@
+<?php if($page['not_logged_in']):?>
+	<?=$page['not_logged_in']?> <br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else : if($page['done']): ?>
+	<?php redirect('forum/categorie/id/'.$_GET['cat_id'].''); ?>
+<?php else: ?>
+	<h3>Adauga un thread nou</h3>
+	<?php if($page['err'])?>
+		<br/><?=$page['err']?>
+	<?php endif; ?>
+	<br/><br/>
+	<form action="/forum/adauga_thread/cat_id/<?=$_GET['cat_id']?>" method="post">	
+		Titlu thread: <br/><input type="text" name="titlu_thr" size="64" value="<?=$_POST['titlu_thr']?>"><br/>
+		Titlu post: <br/><input type="text" name="titlu_post" size="64" value="<?=$_POST['titlu_post']?>"><br>					
+		Post:<br/> 
+		<textarea name="cont_post" rows="4" cols="48"><?=$_POST['cont_post']?></textarea><br/><br/>
+		<input type="submit" value="Adauga">
+	</form>	
+	<br/>
+	<h3>Inapoi la <a href="forum/index">Index</a> sau la <a href="forum/categorie/id/<?=$_GET['cat_id']?>">Categorie</a></h3>
+	
+<? endif; ?>

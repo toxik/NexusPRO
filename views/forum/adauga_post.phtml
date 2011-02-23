@@ -1,0 +1,31 @@
+<?php if($page['not_logged_in']):?>
+	<?=$page['not_logged_in']?> <br/>
+	<a href="auth/index">Login</a> sau <a href="auth/signup">Inregistreaza-te</a>
+<?php else : if($page['nu_exista']): ?>
+	<?=$page['nu_exista']?><br/>
+		<a href="/forum/categorie/id/<?=$_GET['cat_id']?>">Inpoi la categorie</a> sau 
+		<a href="/forum/index">Inapoi la index</a>
+<?php else : if($page['inchis']): ?>
+	<?=$page['inchis']?><br/>
+	<a href="forum/thread/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>">Inapoi la thread</a>, 
+	<a href="/forum/categorie/id/<?=$_GET['cat_id']?>">la categorie</a> sau 
+	<a href="/forum/index">inapoi la index</a>
+<?php else : if($page['done']): ?>
+	<?php redirect('forum/thread/cat_id/'.$_GET[cat_id].'/thr_id/'.$_GET['thr_id'].''); ?>
+<?php else: ?>
+	<h3>Adauga post</h3>
+	<?php if($page['err'])?>
+		<br/><?=$page['err']?>
+	<?php endif; ?>
+	<br/><br/>
+	<form action="/forum/adauga_post/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>" method="post">		
+		Titlu post: <br/><input type="text" name="titlu_post" size="64"><br/>					
+		Post:<br/> 
+		<textarea name="cont_post" rows="4" cols="48"><?=$_POST['cont_post']?></textarea><br/><br/>
+		<input type="submit" value="Adauga">
+	</form>	<br/>
+	<h3>
+	<a href="forum/thread/cat_id/<?=$_GET['cat_id']?>/thr_id/<?=$_GET['thr_id']?>">Inapoi la thread</a>, 
+	<a href="/forum/categorie/id/<?=$_GET['cat_id']?>">la categorie</a> sau 
+	<a href="/forum/index">inapoi la index</a></h3>
+<? endif;endif;endif; ?>
